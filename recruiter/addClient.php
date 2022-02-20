@@ -1,29 +1,16 @@
 <?php
-    session_start();
+   include 'connection1.php';      //database connection page included
+session_start();            //session has been started
 
-    if(isset($_POST['next'])){
-       foreach ($_POST as $key => $value)
-       {
-           $_SESSION['info'][$key] = $value;
-       }
-    
-       $keys = array_keys($_SESSION['info']);
-    
-       if(in_array('next', $keys)){
-           unset($_SESSION['info']['next']);
-       }
-    
-       header("Location: addClient1.php");
-    } 
 
 ?>
 <?php include('header.php')?>
 <link rel="stylesheet" href="./css/addClient.css">
 <title>Analysed</title>
-<form action="" method="post">
+<form action="addClient1.php" method="post" enctype="multipart/form-data"> <!-- redirecting to contact information page with data of General information -->
 <div class="container">
     <div class="bread-crumbs_Mytools-recruiter">
-        <a href="/">Dashboard</a> > <a href="">My Database</a> > <a href="">Add client</a> 
+        <a href="/">Dashboard</a> > <a href="">My Database</a> > <a href="">Add client</a>
     </div>
     <div class="small_container">
         <div class="heading_dash">
@@ -42,14 +29,14 @@
                 <div class="row-recruiter image-box-right-side-add-client">
                     <div class="left-side-image-box-add-client-1">
                         <div class="sub-divs-image-box-right-side-add-client">
-                            <input type="file" name="company_img" required class="input-image-upload-ekam-1-add-client" id="input-image-upload-ekam-1-add-client">
+                            <input type="file" name="fileToUpload"  class="input-image-upload-ekam-1-add-client" id="input-image-upload-ekam-1-add-client">
                             <label class="label-for-image-upload-ekam-1client" for="input-image-upload-ekam-1-add-client">
                                 <h2><i class="fa fa-building" aria-hidden="true"></i></h2>
                                 <p><i class="fa fa-camera" aria-hidden="true"></i></p>
                             </label>
                         </div>
                     </div>
-                  
+
                     <div class="right-side-image-box-right-add-client-1">
                         <div class="row-recruiter sub-divs-image-box-right-side-add-client">
                             <p class="input-para-add-client-ekam-1">
@@ -84,7 +71,7 @@
                     </div>
                 </div>
                 <div class="row-recruiter inputs-for-add-client-below-image-box">
-                    <p class="select-for-select-image-box-below-inputs"> 
+                    <p class="select-for-select-image-box-below-inputs">
                         <label for="default-select-for-no.3">Industry</label>
                             <select name="industry" id="default-select-for-no.3" class="default-select-for-add-client-1" required>
                                 <option value="" default>Select Industry</option>
@@ -93,7 +80,7 @@
                                 <option value="Working">Working</option>
                             </select>
                     </p>
-                    <p class="select-for-select-image-box-below-inputs"> 
+                    <p class="select-for-select-image-box-below-inputs">
                         <label for="default-select-for-no.4">Source</label>
                             <select name="source" id="default-select-for-no.4" class="default-select-for-add-client-1" required>
                                 <option value="" default>Select your source</option>
@@ -102,7 +89,7 @@
                                 <option value="Indeed">Indeed</option>
                             </select>
                     </p>
-                    <p class="select-for-select-image-box-below-inputs"> 
+                    <p class="select-for-select-image-box-below-inputs">
                         <label for="default-select-for-no.5">Parent Company</label>
                             <select name="parent_company" id="default-select-for-no.5" class="default-select-for-add-client-1" required>
                                 <option value="" default>Select a parent company</option>
@@ -111,7 +98,7 @@
                                 <option value="Analysed">Analysed</option>
                             </select>
                     </p>
-                    <p class="select-for-select-image-box-below-inputs"> 
+                    <p class="select-for-select-image-box-below-inputs">
                         <label for="default-select-for-no.6">Active contact</label>
                             <select name="active_contact" id="default-select-for-no.6" class="default-select-for-add-client-1" required>
                                 <option value="" default>Select active contact if available</option>
@@ -120,28 +107,25 @@
                                 <option value="Albert">Albert</option>
                             </select>
                     </p>
-                    <p class="textarea-div-default-select-no7"> 
+                    <p class="textarea-div-default-select-no7">
                         <label for="default-select-for-no.7">Add company's description</label>
                             <textarea name="company_desc" id="default-select-for-no.7" class="text-area-for-company-description-add-client" placeholder="Company description" required>
                             </textarea>
                     </p>
-                    <p class="input-para-add-client-ekam-1"> 
+                    <p class="input-para-add-client-ekam-1">
                         <label for="default-select-for-no.9">Permanent fee</label>
                             <input id="default-select-for-no.9" name="permanent_fee" class="default-input-for-add-client-1" placeholder="Enter value in %" required>
                     </p>
-                    <p class="input-para-add-client-ekam-1"> 
+                    <p class="input-para-add-client-ekam-1">
                         <label for="default-select-for-no.10">Contract fee</label>
                         <input id="default-select-for-no.10" name="contract_fee" class="default-input-for-add-client-1" placeholder="Enter value in %" required>
                     </p>
                     </div>
                     <input type = "submit" name = "next" class="save_button_addClient default-button-for-recruiter-dashboard" value="Save" >
             </div>
-           
+
         </div>
     </div>
     </div>
 </div>
 </form>
-
-
-

@@ -1,45 +1,36 @@
 <?php
 
-    session_start();
-    // $file_name = $_FILES['resume']['name'];
-    // $file_size =$_FILES['resume']['size'];
-    // $file_tmp =$_FILES['resume']['tmp_name'];
-    // $file_type=$_FILES['resume']['type'];
-    // $file_ext=strtolower(end(explode('.',$_FILES['resume']['name'])));
-    
-   // $extensions= array(".docx",".doc",".pdf");
-    
-    // if(in_array($file_ext,$extensions)=== false){
-    //    $errors[]="extension not allowed, please choose a PDF or DOC file.";
-    // }
-    
-    // if($file_size > 6097152){
-    //    $errors[]='File size must be less than 6 MB';
-    // }
-    
-    // if(empty($errors)==true){
-    //    move_uploaded_file($file_tmp,"resume/".$file_name);
-    //    echo "Success";
-    // }else{
-    //    print_r($errors);
-    // }
+include 'connection1.php';          //database connection page included
+session_start();            //session has been started
 
-    if(isset($_POST['submit'])){
-        foreach ($_POST as $key => $value)
-        {
-            $_SESSION['info'][$key] = $value;
-        }
-     
-        $keys = array_keys($_SESSION['info']);
-     
-        if(in_array('next', $keys)){
-            unset($_SESSION['info']['next']);
-        }
-     
-        
-     } 
+    // posting all data from personal information page to global variables using $_Session['']
+    if (isset($_POST['next'])) {
+
+
+    $_SESSION['talent']  = $_POST['talents'];
+    $_SESSION['skills'] = $_POST['skills'];
+    $_SESSION['qualification'] = $_POST['qualification'];
+
+
+    $td="../img/";
+    $tf=$td.basename($_FILES["resume"]["name"]);
+
+   $_SESSION['resume']  = basename($_FILES["resume"]["name"]);
+
+    $move= move_uploaded_file($_FILES["resume"]["tmp_name"] , $tf);
+
+    if (!($move)) {
+
+        echo "something wrong";
+    }
+
+  }
+
 
 ?>
+
+
+
 <?php include('header.php')?>
 <link rel="stylesheet" href="./css/addClient.css">
 <link rel="stylesheet" href="./css/addCandidates1.css">
@@ -47,7 +38,7 @@
 <title>Analysed</title>
 <div class="container">
 <div class="bread-crumbs_Mytools-recruiter">
-        <a href="/" class="unactive-breadcrumb-link">Dashboard</a> > <a href="" class="unactive-breadcrumb-link">My Database</a> > <a href="" class="active-breadcrumb-link">Add candidates</a> 
+        <a href="/" class="unactive-breadcrumb-link">Dashboard</a> > <a href="" class="unactive-breadcrumb-link">My Database</a> > <a href="" class="active-breadcrumb-link">Add candidates</a>
     </div>
     <div class="small_container">
         <div class="heading_dash">
@@ -67,7 +58,7 @@
                 <img src="./img/clipboard.svg" width="50px" style="margin-right: 30px;">
                     <h2 class="heading-for-general-information-right-side-add-client-container">Additional information</h2>
                 </div>
-                <form action="" method="post">
+                <form action="addcandidateInsert.php" method="POST" enctype="multipart/form-data">   <!-- redirecting to insert query page with data of Additional information -->
                 <div class="row-recruiter inputs-for-add-client-below-image-box">
                     <div class="right-side-image-box-right-add-client-1">
                                 <div class="row-recruiter sub-divs-image-box-right-side-add-client">
@@ -79,7 +70,7 @@
                                         <label for="default-input-for-no.1">Availability Date*</label>
                                         <input type="date" name="availability" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" required />
                                     </p>
-                                    <p class="select-for-select-image-box-below-inputs  fx-city-name-1"> 
+                                    <p class="select-for-select-image-box-below-inputs  fx-city-name-1">
                                         <label for="default-select-for-no.6">Job*</label>
                                             <select name="job" id="default-select-for-no.6" class="default-select-for-add-client-1" required />
                                                 <option value="0" default>Andhra Pradesh</option>
@@ -88,7 +79,7 @@
                                                 <option value="3">Working</option>
                                             </select>
                                     </p>
-                                    <p class="select-for-select-image-box-below-inputs  fx-city-name-1"> 
+                                    <p class="select-for-select-image-box-below-inputs  fx-city-name-1">
                                         <label for="default-select-for-no.6">Accessibility*</label>
                                             <select name="accessebility" id="default-select-for-no.6" class="default-select-for-add-client-1" required />
                                                 <option value="0" default>Andhra Pradesh</option>
@@ -97,7 +88,7 @@
                                                 <option value="3">Working</option>
                                             </select>
                                     </p>
-                                    <p class="select-for-select-image-box-below-inputs  fx-city-name-1"> 
+                                    <p class="select-for-select-image-box-below-inputs  fx-city-name-1">
                                         <label for="default-select-for-no.6">Response type*</label>
                                             <select name="reasonType" id="default-select-for-no.6" class="default-select-for-add-client-1" required />
                                                 <option value="0" default>Andhra Pradesh</option>
@@ -115,4 +106,3 @@
     </div>
     </div>
 </div>
-

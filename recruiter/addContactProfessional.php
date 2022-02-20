@@ -1,32 +1,49 @@
 <?php
 
-    session_start();
 
-    if(isset($_POST['submit'])){
-        foreach ($_POST as $key => $value)
-        {
-            $_SESSION['info'][$key] = $value;
-        }
-     
-        $keys = array_keys($_SESSION['info']);
-     
-        if(in_array('next', $keys)){
-            unset($_SESSION['info']['next']);
-        }
-     
-        header("Location: includes/register1.php");
-     } 
+include 'connection1.php';         //database connection page included
+    session_start();        //session has been started
 
+
+
+// posting all data from personal information page to global variables using $_Session['']
+    $_SESSION['fname']  = $_POST['fname'];
+    $_SESSION['lname']  = $_POST['lname'];
+    $_SESSION['status']  = $_POST['status'];
+    $_SESSION['mname']  = $_POST['mname'];
+    $_SESSION['email']  = $_POST['email'];
+    $_SESSION['phone']  = $_POST['phone'];
+    $_SESSION['address']  = $_POST['address'];
+    $_SESSION['city']  = $_POST['city'];
+    $_SESSION['zip_code']  = $_POST['zip_code'];
+    $_SESSION['state']  = $_POST['state'];
+    $_SESSION['country']  = $_POST['country'];
+
+
+
+    // method to insert any files in database
+    $td="../img/";
+    $tf=$td.basename($_FILES["fileToUpload"]["name"]);
+
+    $_SESSION['image'] = basename($_FILES["fileToUpload"]["name"]);
+
+    $move= move_uploaded_file($_FILES["fileToUpload"]["tmp_name"] , $tf);
+
+    if (!($move)) {
+
+        echo "something wrong";
+    }
 
 
 ?>
+
 <?php include('header.php')?>
 <link rel="stylesheet" href="./css/addClient.css">
 <title>Analysed</title>
-<form action="" method="post">
+<form action="addContatadd.php" method="post" enctype="multipart/form-data"> <!-- redirecting to Additional info page with data of professional info -->
 <div class="container">
     <div class="bread-crumbs_Mytools-recruiter">
-        <a href="/">Dashboard</a> > <a href="">My Database</a> > <a href="">Add Contact</a> 
+        <a href="/">Dashboard</a> > <a href="">My Database</a> > <a href="">Add Contact</a>
     </div>
     <div class="small_container">
         <div class="heading_dash">
@@ -40,7 +57,7 @@
                 <p class="links-for-add-client-low-side-row-for-add-client active" id="link-categories-addContact-2"><a href="addContactProfessional.php" class="active">Professional info</a></p>
                 <p class="links-for-add-client-low-side-row-for-add-client" id="link-categories-addContact-3"><a href="addContatadd.php">Additional info</a></p>
             </div>
-            
+
             <div class="right-side-row-for-add-client-container-1" id="professional-information-addcontact-1">
                 <h2 class="heading-for-general-information-right-side-add-client-container  heading-addContact-2"><i class="fa fa-user" aria-hidden="true"></i> Professional information</h2>
                 <div class="row-recruiter image-box-right-side-add-client">
@@ -106,13 +123,12 @@
                                         <input name="skills" type="text" class="default-input-for-add-client-1" placeholder="Enter Required skills" id="default-input-for-no.2">
                                     </p>
                             </div>
-                             <input type = "submit" name = "submit" class="save_button_addClient default-button-for-recruiter-dashboard" value="Save" >
+                             <input type = "submit" name = "next" class="save_button_addClient default-button-for-recruiter-dashboard" value="Save" >
                     </div>
                 </div>
             </div>
         </div>
-       
+
     </div>
 </div>
 </form>
-

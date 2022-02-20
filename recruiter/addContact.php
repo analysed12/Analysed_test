@@ -1,29 +1,17 @@
 <?php
-    session_start();
 
-    if(isset($_POST['next'])){
-       foreach ($_POST as $key => $value)
-       {
-           $_SESSION['info'][$key] = $value;
-       }
-    
-       $keys = array_keys($_SESSION['info']);
-    
-       if(in_array('next', $keys)){
-           unset($_SESSION['info']['next']);
-       }
-    
-       header("Location: addContatadd.php");
-    } 
-
+    include 'connection1.php';         //database connection page included
+    session_start();            //session has been started
 ?>
+
+
 <?php include('header.php')?>
 <link rel="stylesheet" href="./css/addClient.css">
 <title>Analysed</title>
-<form action="" method="post">
+<form action="addContactProfessional.php" method="post" enctype="multipart/form-data"> <!-- redirecting to  professional info page with data of personal info -->
 <div class="container">
     <div class="bread-crumbs_Mytools-recruiter">
-        <a href="/">Dashboard</a> > <a href="">My Database</a> > <a href="">Add Contact</a> 
+        <a href="/">Dashboard</a> > <a href="">My Database</a> > <a href="">Add Contact</a>
     </div>
     <div class="small_container">
         <div class="heading_dash">
@@ -42,7 +30,7 @@
                 <h2 class="heading-for-general-information-right-side-add-client-container heading-addContact-1"><i class="fa fa-home" aria-hidden="true"></i> Personal information</h2>
                 <div class="left-side-image-box-add-client-1">
                         <div class="sub-divs-image-box-right-side-add-client">
-                            <input type="file" class="input-image-upload-ekam-1-add-client" id="input-image-upload-ekam-1-add-client" name="picture">
+                            <input type="file" class="input-image-upload-ekam-1-add-client" id="input-image-upload-ekam-1-add-client" name="fileToUpload">
                                 <label class="label-for-image-upload-ekam-1client position-absolute-label-ekam-addclient" for="input-image-upload-ekam-1-add-client">
                                 <h2 style="padding:20px 30px"><i class="fa fa-user" aria-hidden="true"></i></h2>
                                 <p style="margin-left:80px;margin-top:-30px;"><i class="fa fa-camera" aria-hidden="true"></i></p>
@@ -87,20 +75,20 @@
                                     <label for="default-input-for-no.2">Contact number * </label>
                                     <input type="tel" maxlength="10" name="phone" class="default-input-for-add-client-1" placeholder="Contact number" id="default-input-for-no.2">
                                 </p>
-                                <div class="row-recruiter inputs-for-add-client-below-image-box" style="width:100%">    
-                                    <p class="input-para-add-client-ekam-1"> 
+                                <div class="row-recruiter inputs-for-add-client-below-image-box" style="width:100%">
+                                    <p class="input-para-add-client-ekam-1">
                                             <label for="default-select-for-no.13">Address</label>
                                             <input id="default-select-for-no.13" name="address" type="text" class="default-input-for-add-client-1" placeholder="Enter your address">
                                     </p>
-                                    <p class="input-para-add-client-ekam-1 fx-city-name"> 
+                                    <p class="input-para-add-client-ekam-1 fx-city-name">
                                             <label for="default-select-for-no.13">City name</label>
                                             <input id="default-select-for-no.13" name="city" type="text" class="default-input-for-add-client-1" placeholder="Enter your city name">
                                     </p>
-                                    <p class="input-para-add-client-ekam-1 fx-zipcode"> 
+                                    <p class="input-para-add-client-ekam-1 fx-zipcode">
                                             <label for="default-select-for-no.13">Zipcode</label>
                                             <input id="default-select-for-no.13" name="zip_code" type="number" class="default-input-for-add-client-1" placeholder="Enter zipcode of city">
                                     </p>
-                                    <p class="select-for-select-image-box-below-inputs"> 
+                                    <p class="select-for-select-image-box-below-inputs">
                                         <label for="default-select-for-no.6">State</label>
                                             <select name="state" id="default-select-for-no.6" class="default-select-for-add-client-1">
                                                 <option value="0" default>Andhra Pradesh</option>
@@ -109,7 +97,7 @@
                                                 <option value="3">Working</option>
                                             </select>
                                     </p>
-                                    <p class="select-for-select-image-box-below-inputs"> 
+                                    <p class="select-for-select-image-box-below-inputs">
                                         <label for="default-select-for-no.6">Country</label>
                                             <select name="country" id="default-select-for-no.6" class="default-select-for-add-client-1">
                                                 <option value="0" default>India</option>
@@ -125,8 +113,7 @@
                 </div>
             </div>
         </div>
-       
-    </div>
-</div>  
-</form>
 
+    </div>
+</div>
+</form>

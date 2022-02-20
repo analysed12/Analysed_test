@@ -1,31 +1,9 @@
 <?php
-    session_start();
-    
-    if(isset($_POST['next'])){
-        foreach ($_POST as $key => $value)
-        {
-            $_SESSION['info'][$key] = $value;
-        }
-     
-        $keys = array_keys($_SESSION['info']);
-     
-        if(in_array('next', $keys)){
-            unset($_SESSION['info']['next']);
-        }
-        
-        $file_name = $_FILES['image-file']['name'];
-        $file_type = $_FILES['image-file']['type'];
-        $file_size = $_FILES['image-file']['size'];
-        $file_tem_loc = $_FILES['image-file']['tmp_name'];
-        $file_store = "dp/".$file_name;
-
-        move_uploaded_file($file_tem_loc,$file_store);
-
-        header("Location: addCandidates2.php");
-     } 
- 
-
+include 'connection1.php';         //database connection page included
+session_start();            //session has been started
 ?>
+
+
 <?php include('header.php')?>
 <link rel="stylesheet" href="./css/addClient.css">
 <link rel="stylesheet" href="./css/addCandidates1.css">
@@ -33,7 +11,7 @@
 <title>Analysed</title>
 <div class="container">
 <div class="bread-crumbs_Mytools-recruiter">
-        <a href="/" class="unactive-breadcrumb-link">Dashboard</a> > <a href="" class="unactive-breadcrumb-link">My Database</a> > <a href="" class="active-breadcrumb-link">Add candidates</a> 
+        <a href="/" class="unactive-breadcrumb-link">Dashboard</a> > <a href="" class="unactive-breadcrumb-link">My Database</a> > <a href="" class="active-breadcrumb-link">Add candidates</a>
     </div>
     <div class="small_container">
         <div class="heading_dash">
@@ -54,15 +32,15 @@
                 <img src="./img/user.svg" width="50px" style="margin-right: 30px;">
                     <h2 class="heading-for-general-information-right-side-add-client-container">Personal information</h2>
                 </div>
-                   
+
 
                     </div>
                 </div>
-                <form action="" method="post">
+                <form action="addCandidates2.php" method="POST" enctype="multipart/form-data"> <!-- redirecting to professional information page with data of personal information -->
                 <div class="row-recruiter image-box-right-side-add-client">
                         <div class="left-side-image-box-add-client-1">
                             <div class="sub-divs-image-box-right-side-add-client">
-                                <input type="file" name="image-file" class="input-image-upload-ekam-1-add-client" id="input-image-upload-ekam-1-add-client" />
+                                <input type="file" name="image" class="input-image-upload-ekam-1-add-client" id="input-image-upload-ekam-1-add-client" />
                                 <label class="label-for-image-upload-ekam-1client" for="input-image-upload-ekam-1-add-client">
                                     <h2><i class="" aria-hidden="true"></i></h2>
                                     <p class="position-absolute-image-upload-e"><i class="fa fa-camera" aria-hidden="true"></i></p>
@@ -92,7 +70,7 @@
                                         <label for="default-input-for-no.1">Birth Date*</label>
                                         <input type="date" name="birthdate" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" required />
                                     </p>
-                                    <p class="select-for-select-image-box-below-inputs fx-city-name-1"> 
+                                    <p class="select-for-select-image-box-below-inputs fx-city-name-1">
                                         <label for="default-select-for-no.3">Status</label>
                                             <select name="Industry" id="default-select-for-no.3" class="default-select-for-add-client-1">
                                                 <option value="0" default>Temporary to permanent</option>
@@ -109,26 +87,26 @@
                                         <label for="default-select-for-no.2">Country</label>
                                         <select name="ownership" id="default-select-for-no.2" class="default-select-for-add-client-1">
                                             <option value="0" default>Select Ownership</option>
-                                            <option value="1">Open</option>
-                                            <option value="2">Closed</option>
-                                            <option value="3">Working</option>
+                                            <option value="India">India</option>
+                                            <option value="Australia">Australia</option>
+                                            <option value="Japan">Japan</option>
                                         </select>
                                     </p>
-                                    <p class="input-para-add-client-ekam-1  fx-city-name-1"> 
+                                    <p class="input-para-add-client-ekam-1  fx-city-name-1">
                                         <label for="default-select-for-no.13">City name</label>
                                         <input id="default-select-for-no.13" name="cityname" type="text" class="default-input-for-add-client-1" placeholder="Enter your city name">
                                     </p>
-                                    <p class="input-para-add-client-ekam-1  fx-city-name-1"> 
+                                    <p class="input-para-add-client-ekam-1  fx-city-name-1">
                                             <label for="default-select-for-no.13">Zipcode</label>
                                             <input id="default-select-for-no.13" name="Zipcode" type="text" class="default-input-for-add-client-1" placeholder="Enter zipcode of city">
                                     </p>
-                                    <p class="select-for-select-image-box-below-inputs  fx-city-name-1"> 
+                                    <p class="select-for-select-image-box-below-inputs  fx-city-name-1">
                                         <label for="default-select-for-no.6">State</label>
                                             <select name="State" id="default-select-for-no.6" class="default-select-for-add-client-1">
                                                 <option value="0" default>Andhra Pradesh</option>
-                                                <option value="1">Open</option>
-                                                <option value="2">Closed</option>
-                                                <option value="3">Working</option>
+                                                <option value="karnataka">karnataka</option>
+                                                <option value="UP">UP</option>
+                                                <option value="Maharastra">Maharastra</option>
                                             </select>
                                     </p>
                                 </div>
@@ -140,4 +118,3 @@
     </div>
     </div>
 </div>
-
