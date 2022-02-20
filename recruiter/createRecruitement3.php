@@ -29,10 +29,7 @@ session_start();
        // = $_POST['Workspace_view'];
         $_SESSION['Transportation'] = $_POST['Transportation'];
         
-        echo $_SESSION['file'];
-        echo $_SESSION['Position'];
-        echo $_SESSION['Industry'];
-              
+      
 ?>
 
 
