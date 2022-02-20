@@ -1,31 +1,49 @@
-<!-- addCandidates2.php-->
 <?php
+include 'connection1.php';          //database connection page included
+session_start();             //session has been started
 
-    session_start();
+// posting all data from personal information page to global variables using $_Session['']
 
-    if(isset($_POST['next'])){
-        foreach ($_POST as $key => $value)
-        {
-            $_SESSION['info'][$key] = $value;
-        }
+if (isset($_POST['next'])) {
 
-        $keys = array_keys($_SESSION['info']);
 
-        if(in_array('next', $keys)){
-            unset($_SESSION['info']['next']);
-        }
+$_SESSION['firstname']  = $_POST['firstname'];
+$_SESSION['lastname']   = $_POST['lastname'];
+$_SESSION['emailid']    = $_POST['emailid'];
+$_SESSION['phonenumber'] = $_POST['phonenumber'];
+$_SESSION['birthdate']   = $_POST['birthdate'];
+$_SESSION['Industry']   = $_POST['Industry'];
+$_SESSION['address']    = $_POST['address'];
+$_SESSION['ownership']  = $_POST['ownership'];
+$_SESSION['cityname']   = $_POST['cityname'];
+$_SESSION['Zipcode']    = $_POST['Zipcode'];
+$_SESSION['State']      = $_POST['State'];
 
-        header("Location: addCandidates3.php");
-     }
+
+
+// method to insert any image or doc files in database
+    $td="../img/";
+    $tf=$td.basename($_FILES["image"]["name"]);
+
+    $_SESSION['image']  = basename($_FILES["image"]["name"]);
+
+    $move= move_uploaded_file($_FILES["image"]["tmp_name"] , $tf);
+
+    if (!($move)) {
+
+        echo "something wrong";
+    }
+}
 
 ?>
-<?php include('header1.php')?>
+
+<?php include('header.php')?>
 <link rel="stylesheet" href="./css/addClient.css">
 <link rel="stylesheet" href="./css/addCandidates1.css">
 <title>Analysed</title>
 <div class="container">
 <div class="bread-crumbs_Mytools-recruiter">
-        <a href="js_dashboard.php" class="unactive-breadcrumb-link">Dashboard</a> > <a href="candidate_list.php" class="unactive-breadcrumb-link">My Database</a> > <a href="addCandidates2.php" class="active-breadcrumb-link">Add candidates</a>
+        <a href="/" class="unactive-breadcrumb-link">Dashboard</a> > <a href="" class="unactive-breadcrumb-link">My Database</a> > <a href="" class="active-breadcrumb-link">Add candidates</a>
     </div>
     <div class="small_container">
         <div class="heading_dash">
@@ -45,7 +63,7 @@
                 <img src="./img/mortarboard.svg" width="50px" style="margin-right: 30px;">
                     <h2 class="heading-for-general-information-right-side-add-client-container">Professional information</h2>
                 </div>
-                <form action="" method="post">
+                <form action="addCandidates3.php" method="POST" enctype="multipart/form-data"> <!-- redirecting to skills & Qualification page with data of professional information -->
                 <div class="row-recruiter inputs-for-add-client-below-image-box">
                     <div class="right-side-image-box-right-add-client-1">
                                 <div class="row-recruiter sub-divs-image-box-right-side-add-client">
@@ -60,37 +78,37 @@
                                     <p class="input-para-add-client-ekam-1 right-side fx-city-name-1">
                                         <label for="default-select-for-no1 ">Candidate Type*</label>
                                         <select name="candidateType" id="default-select-for-no.1" class="default-select-for-add-client-1" required />
-                                            <option value="0" default>Select candidate type</option>
-                                            <option value="Contract">Contract</option>
-                                            <option value="Temporary">Temporary</option>
-                                            <option value="Permanent">Permanent</option>
+                                            <option value="0" default>Select Status</option>
+                                            <option value="1">Reviewed</option>
+                                            <option value="2">Contacting</option>
+                                            <option value="3">Hired</option>
                                         </select>
                                     </p>
                                     <p class="select-for-select-image-box-below-inputs fx-city-name-1">
                                         <label for="default-select-for-no.3">Employment Preference*</label>
                                             <select name="employmentPreference" id="default-select-for-no.3" class="default-select-for-add-client-1" required />
-                                                <option value="0" default>Select employment preference</option>
-                                                <option value="Temporary to permanent">Temporary to permanent</option>
-                                                <option value="Temporary">Temporary</option>
-                                                <option value="Permanent">Permanent</option>
+                                                <option value="0" default>Temporary to permanent</option>
+                                                <option value="1">Open</option>
+                                                <option value="2">Closed</option>
+                                                <option value="3">Working</option>
                                             </select>
                                     </p>
                                     <p class="select-for-select-image-box-below-inputs fx-city-name-1">
                                         <label for="default-select-for-no.3">Source*</label>
                                             <select name="source" id="default-select-for-no.3" class="default-select-for-add-client-1" required />
-                                                <option value="0" default>Select source</option>
-                                                <option value="Linkedin">Linkedin</option>
-                                                <option value="Internshala">Internshala</option>
-                                                <option value="Indeed">Indeed</option>
+                                                <option value="0" default>Temporary to permanent</option>
+                                                <option value="1">Open</option>
+                                                <option value="2">Closed</option>
+                                                <option value="3">Working</option>
                                             </select>
                                     </p>
                                     <p class="select-for-select-image-box-below-inputs fx-city-name-1">
                                         <label for="default-select-for-no.3">Recruiter*</label>
                                             <select name="recruiter" id="default-select-for-no.3" class="default-select-for-add-client-1" required />
-                                                <option value="0" default>Select Recruiter</option>
-                                                <option value="Andrew foy">Andrew foy</option>
-                                                <option value="Albert">Albert</option>
-                                                <option value="Alex">Alex</option>
+                                                <option value="0" default>Temporary to permanent</option>
+                                                <option value="1">Open</option>
+                                                <option value="2">Closed</option>
+                                                <option value="3">Working</option>
                                             </select>
                                     </p>
 

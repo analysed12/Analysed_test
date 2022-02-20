@@ -1,26 +1,22 @@
-<?php include('connection1.php'); ?>
 <?php
-    session_start();
 
-    if(isset($_SESSION['firstname'])) {
+include 'connection1.php';     //database connection page included
+session_start();      //session has been started
 
-        $firstname=$_SESSION['firstname'];
 
-        if(isset($_POST['next'])){
-            foreach ($_POST as $key => $value)
-        {
-            $_SESSION['info'][$key] = $value;
-        }
+    if (isset($_POST['next'])) {
+      $_SESSION['current_title']  = $_POST['currentTitle'];
+      $_SESSION['company_Name'] = $_POST['companyName'];
+      $_SESSION['candidate_Type'] = $_POST['candidateType'];
+      $_SESSION['employment_Preference'] = $_POST['employmentPreference'];
+      $_SESSION['source'] = $_POST['source'];
+      $_SESSION['recruiter'] = $_POST['recruiter'];
+      $_SESSION['current_Salary'] = $_POST['currentSalary'];
+      $_SESSION['salary_Range1'] = $_POST['salaryRange1'];
+      $_SESSION['salary_Range2'] = $_POST['salaryRange2'];
 
-        $keys = array_keys($_SESSION['info']);
 
-        if(in_array('next', $keys)){
-            unset($_SESSION['info']['next']);
-        }
-
-        header("Location: edit-Candidates4.php");
-     }
-
+    }
 ?>
 <?php include('header1.php')?>
 <link rel="stylesheet" href="./css/addClient.css">
@@ -30,7 +26,7 @@
 <title>Analysed</title>
 <div class="container">
     <div class="bread-crumbs_Mytools-recruiter">
-        <a href="js_dashboard.php" class="unactive-breadcrumb-link">Dashboard</a> > <a href="candidate_list.php" class="unactive-breadcrumb-link">My Database</a> > <a href="edit-Candidates3.php" class="active-breadcrumb-link">Add candidates</a>
+        <a href="/" class="unactive-breadcrumb-link">Dashboard</a> > <a href="" class="unactive-breadcrumb-link">My Database</a> > <a href="" class="active-breadcrumb-link">Add candidates</a>
     </div>
     <div class="small_container">
         <div class="heading_dash">
@@ -51,12 +47,15 @@
                     <h2 class="heading-for-general-information-right-side-add-client-container">Skills & Qualification</h2>
                 </div>
                 <?php
-                $sql=mysqli_query($conn,"select * from candidates where firstname='$firstname'");
-                $check=mysqli_num_rows($sql)>0;
-                if($check){
-                    while($row=mysqli_fetch_assoc($sql)){
-                        ?>
-                <form action="" method="post">
+
+
+
+                                $sql=mysqli_query($con,"select * from candidates where candidate_id='".$_SESSION['cid']."'");
+                                $check=mysqli_num_rows($sql)>0;
+                                if($check){
+                                    while($row=mysqli_fetch_assoc($sql)){
+                       ?>
+                <form action="edit-Candidates4.php" method="post" enctype="multipart/form-data">
                 <div class="row-recruiter inputs-for-add-client-below-image-box">
                     <div class="right-side-image-box-right-add-client-1">
                                 <div class="row-recruiter sub-divs-image-box-right-side-add-client">
@@ -76,7 +75,7 @@
                                     <p class="input-para-add-client-ekam-1 right-side fx-city-name-1">
                                         <label for="default-select-for-no1 ">Qualification*</label>
                                         <select name="qualification" id="default-select-for-no.1" class="default-select-for-add-client-1" required />
-                                            <option value="<?php echo $row['qualifications']; ?>" default><?php echo $row['qualifications']; ?></option>
+                                            <option value="<?php echo $row['qualification']; ?>" default><?php echo $row['qualification']; ?></option>
                                             <option value="MSc">MSc</option>
                                             <option value="BSc">BSc</option>
                                             <option value="BCom">B.Com</option>
@@ -86,7 +85,7 @@
                                 <input type = "submit" name = "next" class="save_button_addClient default-button-for-recruiter-dashboard" value="Save" >
                         </div>
                     </form>
-                <?php } } } ?>
+                <?php } } ?>
                 </div>
             </div>
         </div>

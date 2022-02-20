@@ -1,3 +1,11 @@
+
+<?php
+
+   include 'connection1.php';     //database connection page included
+   session_start();      //session has been started
+?>
+
+
 <?php include('header.php') ?>
 <title>Dashboard</title>
 <link rel="stylesheet" href="css/contact_list.css">
@@ -12,18 +20,18 @@
         <div class="head_txt">
             My Contact
         </div>
-
-        <div>
+         <form action="" method="post">
+            <div>
             <a href="/" class="sub_1">Create new contact and manage old ones</a>
-            <a href="./recruiter/addClient.php"><button class="addFilesMyTasks1" >Add + </button></a>
-        </div>
+            <button class="addFilesMyTasks1" href="addContact.php">Add + </button>
+            </div>
 
-      <div class="container" style="margin-left:-2%;">
-        <div class="row">
+            <div class="container" style="margin-left:-2%;">
+            <div class="row">
             <div class="col-7">
                 <div class="input-field" style="width:585px">
                 <img src="img/person.png" alt="" height="25px" width="25px" class="box_1"><span id="m1">Company&nbsp;</span>
-                <input type="text"  name="searchForJobs" id="inputSearch_12" class="searchForJobs"
+                <input type="text"  name="searchForNames" id="inputSearch_12" class="searchForJobs"
                     placeholder="| &emsp;&emsp;Search by name "
                 />
                 <button class="searchButton">
@@ -31,38 +39,105 @@
                 </button>
                 </div>
             </div>
+
             <div class="col-5">
                 <span class="sortByMyTasks">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Sort By: </span>
-                <span class="recentMyTasks"><a href="/" class="active-breadcrumb-link">Recent </a></span>
+                <span class="recentMyTasks"><a href="/" class="active-breadcrumb-link"><input type="submit" value ="Recent" name="recent"> </a></span>
                 <span class="sortByMyTasks" style="color:black">Last Edited &nbsp;<img src="img/dropdown.png" width="15" height="10" style="font:right" /></span>
             </div>
-        </div><br>
-     </div>
+            </div><br>
+            </div>
 
         <div class="singleTasks_containerDiv">
 
-            <div class="singletask_myTasks">
+            <div class="row">
+                <?php
+
+                           if(isset($_POST['searchForNames'])){     //condition to find set of variable if search area is been filled and search button has been pressed
+
+                             // code block to search according to given clauses
+                            $search = $_POST['searchForNames'];
+                            $search = preg_replace("#[^0-9a-z]#i","",$search);
+                            $sql= "select * from addcontact WHERE fname like '%$search%' OR lname like '%$search%' ";
+
+                            // query to establish connection from database and get the output of required query
+                            $run = mysqli_query($con,$sql);
+                            $i= 1;
+
+                            // displaying all the data from the table
+                            while($row =mysqli_fetch_assoc($run)) {
+                            ?>
+
+
+                            <div class="singletask_myTasks">
+                            <input type="checkbox" name="checkBoxItem" style="border: 1px solid #3598db;" >
+                            <img src="upload/<?php echo $row['image']; ?>" width="65" height="65">
+                            <span >
+                            <p id="k1"><?php echo $row['fname'] ; ?></p>
+                            <p id="k2">Company Name</p>
+                            </span>
+                            &emsp;&emsp;&emsp;&emsp;&emsp;
+                            <span >
+                            <p class="sub_1"><?php echo $row['job_title'] ; ?></p>
+                            <p id="k2"><?php echo $row['company_name'];?></p>
+                            </span>&emsp;
+                            <span >
+                            <p class="sub_1"><?php echo $row['phone'];?></p>
+                            <p class="sub_1" style="line-height: 0.5;"><?php echo $row['email'];?></p>
+                            </span>&emsp;&emsp;
+                            <span style="color:#979797">
+                            <p><img src="img/location-pin.png" width="15" height="16"><?php echo $row['city'];?></p>
+                            </span>&emsp;&emsp;
+                             <span>
+                            <p id="k2">Added on
+                            <span style="color:#333333"><?php echo $row['added_On']; ?></span></o>
+                                <div class="button-div_myTasks">
+                                    <p style="color:#3598DB">&nbsp;Edit <i class="fa fa-edit" aria-hidden="true"></i>
+                                    <span style="font-size:14px;color:#EC4551">&emsp;&emsp;&emsp;&emsp;&emsp;Delete <i class="fa fa-trash" aria-hidden="true"></i></span></p>
+                                </div>
+                            </span>
+
+                            </div>
+
+                        <?php }} ?>
+
+
+                        <?php
+
+                             if(!isset($_POST['searchForNames'])){
+                               // code block for all data to be displayed if there are no clauses
+                                $sql= "select * from addcontact ";
+                                // query to establish connection from database and get the output of required query
+                                $run = mysqli_query($con,$sql);
+                                $i= 1;
+
+
+                                // displaying all the data from the table
+                                 while($row =mysqli_fetch_assoc($run)) {
+
+                        ?>
+                <div class="singletask_myTasks">
                 <input type="checkbox" name="checkBoxItem" style="border: 1px solid #3598db;" >
-                <img src="img/Profile3.png" width="65" height="65">
+                <img src="upload/<?php echo $row['image']; ?>" width="65" height="65">
                 <span >
-                    <p id="k1">Chris Do</p>
+                    <p id="k1"><?php echo $row['fname'] ; ?></p>
                     <p id="k2">Company Name</p>
                 </span>
                 &emsp;&emsp;&emsp;&emsp;&emsp;
                 <span >
-                    <p class="sub_1">Web Developer</p>
-                    <p id="k2">Lorem Ipsum</p>
+                    <p class="sub_1"><?php echo $row['job_title'] ; ?></p>
+                    <p id="k2"><?php echo $row['company_name'];?></p>
                 </span>&emsp;
                 <span >
-                    <p class="sub_1">+91 9090909090</p>
-                    <p class="sub_1" style="line-height: 0.5;">example@gmail.com</p>
+                    <p class="sub_1"><?php echo $row['phone'];?></p>
+                    <p class="sub_1" style="line-height: 0.5;"><?php echo $row['email'];?></p>
                 </span>&emsp;&emsp;
                 <span style="color:#979797">
-                    <img src="img/location-pin.png" width="15" height="16">Hyderabad
+                    <p><img src="img/location-pin.png" width="15" height="16"><?php echo $row['city'];?></p>
                 </span>&emsp;&emsp;
                 <span>
                     <p id="k2">Added on
-                    <span style="color:#333333"> 05-05-2020</span></o>
+                    <span style="color:#333333"><?php echo $row['added_On']; ?></span></p>
                     <div class="button-div_myTasks">
                         <p style="color:#3598DB">&nbsp;Edit <i class="fa fa-edit" aria-hidden="true"></i>
                         <span style="font-size:14px;color:#EC4551">&emsp;&emsp;&emsp;&emsp;&emsp;Delete <i class="fa fa-trash" aria-hidden="true"></i></span></p>
@@ -71,94 +146,16 @@
 
             </div>
 
-            <div class="singletask_myTasks">
-                <input type="checkbox" name="checkBoxItem" style="border: 1px solid #3598db;" >
-                <img src="img/Profile1.png" width="65" height="65">
-                <span >
-                    <p id="k1">Chris Do</p>
-                    <p id="k2">Company Name</p>
-                </span>
-                &emsp;&emsp;&emsp;&emsp;&emsp;
-                <span >
-                    <p class="sub_1">Web Developer</p>
-                    <p id="k2">Lorem Ipsum</p>
-                </span>&emsp;
-                <span >
-                    <p class="sub_1">+91 9090909090</p>
-                    <p class="sub_1" style="line-height: 0.5;">example@gmail.com</p>
-                </span>&emsp;&emsp;
-                <span style="color:#979797">
-                    <img src="img/location-pin.png" width="15" height="16">Hyderabad
-                </span>&emsp;&emsp;
-                <span>
-                    <p id="k2">Added on
-                    <span style="color:#333333"> 05-05-2020</span></o>
-                    <div class="button-div_myTasks">
-                        <p style="color:#3598DB">&nbsp;Edit <i class="fa fa-edit" aria-hidden="true"></i>
-                        <span style="font-size:14px;color:#EC4551">&emsp;&emsp;&emsp;&emsp;&emsp;Delete <i class="fa fa-trash" aria-hidden="true"></i></span></p>
-                    </div>
-                </span>
+                        <?php }} ?>
+
+
+
+
+
 
             </div>
+            </form>
 
-            <div class="singletask_myTasks">
-                <input type="checkbox" name="checkBoxItem" style="border: 1px solid #3598db;" >
-                <img src="img/Prof-2.png" width="65" height="65">
-                <span >
-                    <p id="k1">Chris Do</p>
-                    <p id="k2">Company Name</p>
-                </span>
-                &emsp;&emsp;&emsp;&emsp;&emsp;
-                <span >
-                    <p class="sub_1">Web Developer</p>
-                    <p id="k2">Lorem Ipsum</p>
-                </span>&emsp;
-                <span >
-                    <p class="sub_1">+91 9090909090</p>
-                    <p class="sub_1" style="line-height: 0.5;">example@gmail.com</p>
-                </span>&emsp;&emsp;
-                <span style="color:#979797">
-                    <img src="img/location-pin.png" width="15" height="16">Hyderabad
-                </span>&emsp;&emsp;
-                <span>
-                    <p id="k2">Added on
-                    <span style="color:#333333"> 05-05-2020</span></o>
-                    <div class="button-div_myTasks">
-                        <p style="color:#3598DB">&nbsp;Edit <i class="fa fa-edit" aria-hidden="true"></i>
-                        <span style="font-size:14px;color:#EC4551">&emsp;&emsp;&emsp;&emsp;&emsp;Delete <i class="fa fa-trash" aria-hidden="true"></i></span></p>
-                    </div>
-                </span>
-
-            </div>
-            <div class="singletask_myTasks">
-                <input type="checkbox" name="checkBoxItem" style="border: 1px solid #3598db;" >
-                <img src="img/Ellipse 148-1.png" width="65" height="65">
-                <span >
-                    <p id="k1">Chris Do</p>
-                    <p id="k2">Company Name</p>
-                </span>
-                &emsp;&emsp;&emsp;&emsp;&emsp;
-                <span >
-                    <p class="sub_1">Web Developer</p>
-                    <p id="k2">Lorem Ipsum</p>
-                </span>&emsp;
-                <span >
-                    <p class="sub_1">+91 9090909090</p>
-                    <p class="sub_1" style="line-height: 0.5;">example@gmail.com</p>
-                </span>&emsp;&emsp;
-                <span style="color:#979797">
-                    <img src="img/location-pin.png" width="15" height="16">Hyderabad
-                </span>&emsp;&emsp;
-                <span>
-                    <p id="k2">Added on
-                    <span style="color:#333333"> 05-05-2020</span></o>
-                    <div class="button-div_myTasks">
-                        <p style="color:#3598DB">&nbsp;Edit <i class="fa fa-edit" aria-hidden="true"></i>
-                        <span style="font-size:14px;color:#EC4551">&emsp;&emsp;&emsp;&emsp;&emsp;Delete <i class="fa fa-trash" aria-hidden="true"></i></span></p>
-                    </div>
-                </span>
-
-            </div>
         </div>
         <br><br>
     </div>

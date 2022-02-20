@@ -1,6 +1,6 @@
 
 <?php
-include 'conn.php';     //database connection page included
+include 'connection1.php';     //database connection page included
 session_start();      //session has been started
 
 
@@ -12,7 +12,7 @@ if (isset($_POST['next'])) {
 
 
 
-    $td="../Analysed_test-main/img/";
+      $td="../img/";
     $tf=$td.basename($_FILES["resume"]["name"]);
 
    $_SESSION['resume']  = basename($_FILES["resume"]["name"]);

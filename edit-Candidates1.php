@@ -2,7 +2,7 @@
 <?php
 
 
-   include 'conn.php';     //database connection page included
+   include 'connection1.php';     //database connection page included
    session_start();      //session has been started
 
 
