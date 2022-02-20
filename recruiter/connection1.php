@@ -5,9 +5,9 @@ $username = "root";
 $password = "";
 $dbname = "analysed";
 
-$conn = mysqli_connect($servername,$username,$password,$dbname);
+$con = mysqli_connect($servername,$username,$password,$dbname);
 
-if($conn)
+if($con)
 {
 	//echo"connection Ok" ;
 }
