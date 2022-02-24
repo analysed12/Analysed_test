@@ -1,3 +1,35 @@
+<?php
+session_start();
+include 'connection1.php';
+
+if (isset($_POST['submit'])) {
+
+    $username = $_SESSION['username']=$_POST['username'];
+    $pwd = $_POST['password'];
+    $sql = "select * from recruiter where email = '$username'";
+    $run = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($run);
+
+    $pwd_fetch = $row['password'];
+    $pwd_decode  =password_verify($pwd,$pwd_fetch);
+
+    if ($pwd_decode) {
+        echo "loggedin successfully";
+    }
+    else{
+
+        echo "<script>window.open('index.php?error=username or password incorrect','_self')</script>";
+    }
+
+
+}
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html class="no-js" prefix="og: http://ogp.me/ns#"  lang="en-IN">
     <head>
