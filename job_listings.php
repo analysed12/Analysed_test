@@ -1,11 +1,14 @@
-<?php include('include/header.php') ?>
 <?php
-   define('LOCALHOST','localhost');
-   define('DB_USERNAME','root');
-   define('DB_PASSWORD','');
-   define('DB_NAME','analyse');
-   $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
+
+   include 'connection1.php';
+   session_start();
 ?>
+
+
+
+<?php include('include/header.php') ?>
+
+
 <title>Job Listings</title>
 <link rel="stylesheet" href="css/job_listings.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -25,9 +28,27 @@
 </style>
 
 <body>
+    <div class="container" style="margin-left:450px;margin-top:-60px;">
+        <nav class="nav_main">
+     <div class="input-field">
+        <form action="" method="POST">
+          <input
+            type="text"
+            name="searchForJobs1"
+            id="inputSearch"
+            class="searchForJobs"
+            placeholder="Search for Jobs"
+          />
+          <button class="searchButton" name="jobscr">
+            <img src="./img/search-icon-blue.png" />
+          </button>
+          </form>
+        </div>
+    </nav>
+</div>
 <br>
 <div class="bread-crumbs_Mytools-recruiter">
-    <a href="js_dashboard.php" class="active-breadcrumb-link">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Dashboard</a> > <a href="candidate_list.php" class="active-breadcrumb-link">My Dashboard</a> > <a href="Job_listings.php" class="active-breadcrumb-link">Job Listing</a>
+    <a href="/" class="active-breadcrumb-link">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Dashboard</a> > <a href="" class="active-breadcrumb-link">My Dashboard</a> > <a href="" class="active-breadcrumb-link">Job Listing</a>
 </div>
 
 <?php
@@ -36,23 +57,30 @@ $flag=0;
 $status=0;
 if(isset($_POST['btnhigh']))
 {
-  $sql="SELECT * FROM `joblistings` WHERE priority= 'High'";
+  $sql="SELECT * FROM `joblistings` WHERE priority= '3'";
   $flag=1;
 }
 if(isset($_POST['btnlow']))
 {
-  $sql="SELECT * FROM `joblistings` WHERE priority= 'Low'";
+  $sql="SELECT * FROM `joblistings` WHERE priority= '1'";
   $flag=1;
 }
 if(isset($_POST['btnmedium']))
 {
-  $sql="SELECT * FROM `joblistings` WHERE priority= 'Medium'";
+  $sql="SELECT * FROM `joblistings` WHERE priority= '2'";
   $flag=1;
 }
 if(isset($_POST['btnsearch']))
 {
   $searchForJobs=$_POST['searchForJobs'];
   $sql="SELECT * FROM `joblistings` WHERE job_id='$searchForJobs'";
+  $flag=1;
+}
+
+if(isset($_POST['jobscr']))
+{
+  $searchForJobs=$_POST['searchForJobs1'];
+  $sql="SELECT * FROM `joblistings` WHERE position='$searchForJobs'";
   $flag=1;
 }
 if(isset($_POST['btnactive']))
@@ -139,7 +167,7 @@ if(isset($_POST['btnall']))
                 </div>
             </div>
             <div class="col-4">
-                <span class="sortByMyTasks" style="margin-left:40px">Sort By: </span>
+                <span class="sortByMyTasks" style="margin-left:40px ; ">Sort By: </span>
                 <span class="recentMyTasks"><a href="/" class="active-breadcrumb-link">Recent </a></span>
                 <span class="sortByMyTasks" style="color:black">Priority &nbsp;<img src="img/dropdown.png" width="15" height="10" style="font:right" /></span>
             </div>
@@ -158,7 +186,7 @@ if(isset($_POST['btnall']))
                 <div class="categories-mytasks-1-active">
 
                   <form method="post">
-                    <button type="submit" style="background: none;border: none;" name="btnall"><p class="category-mytasks1 active" id="b1" >All</p></button>
+                    <button type="submit" style="background: none;border: none;" name="btnall"><p class=" category-mytasks1 active" id="b1" >All</p></button>
                     <button type="submit" style="background: none;border: none;" name="btnactive"><p class="category-mytasks1" id="b2" >Active</p></button>
                     <button type="submit" style="background: none;border: none;" name="btncompleted"><p class="category-mytasks1 " id="b3" >Completed</p></button>
                  </form>
@@ -180,7 +208,7 @@ if(isset($_POST['btnall']))
             $sql="SELECT * FROM `joblistings`";
           }
             $res=mysqli_query($conn,$sql);
-            if($res == TRUE)
+            if($res)
             {
                 $count=mysqli_num_rows($res);
                 if($count >0)
@@ -194,14 +222,14 @@ if(isset($_POST['btnall']))
                         $client_company=$rows['client_company'];
                         $job_type=$rows['job_type'];
                         $contact_client_company=$rows['contact_client_company'];
-                        $job_views=$rows['job_views'];
+                        // $job_views=$rows['job_views'];
                         $skills=$rows['skills'];
                         $required_experience=$rows['required_experience'];
                         $advert_job_description=$rows['advert_job_description'];
-                        $availability_time=$rows['availability_time'];
-                        $company_email=$rows['company_email'];
+                        // $availability_time=$rows['availability_time'];
+                        // $company_email=$rows['company_email'];
                         $workspace_view=$rows['workspace_view'];
-                        $rec_img=$rows['rec_img'];
+                        $rec_img=$rows['logo'];
                         $job_id=$rows['job_id'];
                         $recruiters_name=$rows['recruiters_name'];
                         $priority=$rows['priority'];
@@ -233,19 +261,19 @@ if(isset($_POST['btnall']))
             <div class="singletask_myTasks">
                 <input type="checkbox" name="checkBoxItem" style="border: 1px solid #3598db;" >
                 <?php
-                   if($priority == 'High')
+                   if($priority == '3')
                    {
                 ?>
                    <img src="img/red-icon.png" width="30" height="20">
                 <?php
                    }
-                   elseif($priority == 'Medium')
+                   elseif($priority == '2')
                    {
                 ?>
                     <img src="img/orange-icon.png" width="20" height="20">
                 <?php
                     }
-                    elseif($priority == 'Low')
+                    elseif($priority == '1')
                     {
                 ?>
                     <img src="img/Yellow-icon.png" width="20" height="20">
@@ -258,8 +286,8 @@ if(isset($_POST['btnall']))
                 </span>
                 <span>
                     <p class="ac_assis"><?php echo $position; ?></p>
-                    <p class="id_num">#<?php echo $job_id; ?></p>
-                    <p class="loc_pin"><i class="fa fa-map-marker"></i> <?php echo $state; ?></p>
+                     <p class="id_num">#<?php echo $job_id; ?></p>
+                     <p class="loc_pin"><i class="fa fa-map-marker"></i> <?php echo $state; ?></p>
                 </span>
                 <span>
                     <p style="color:#333333;font-size:14px;line-height:1px "><?php echo $job_type; ?></p>
@@ -273,23 +301,22 @@ if(isset($_POST['btnall']))
                     <p style="color:#3598DB;line-height:1px "><b><?php echo $contact_client_company; ?></b></p>
                     <p style="color:#333333"><?php echo $client_company; ?></p>
                 </span>
-                <span>
-                    <img src="img/eye-icon.jpg" width="25" height="15"><br>
+                <!-- <span>
+                    <img src="img/eye-icon.jpg" width="25" height="15">
                     <p style="color:#333333; "><b>&nbsp;<?php echo $job_views; ?></b></p>
-                </span>
+                </span> -->
                 <span>
-                    <img src="img/task-icon.png" width="20" height="20"><br>
+                    <img src="img/task-icon.png" width="20" height="20">
                     <p style="color:#333333; "><b>&nbsp;6</b></p>
                 </span>
                 <span>
-                    <img src="img/person-icon.png" width="25" height="20"><br>
-                    <p style="color:#333333; "><b>&nbsp;1/4</b></p>
-                </span>
+                    <img src="img/person-icon.png" width="25" height="20">                    <p style="color:#333333; "><b>&nbsp;1/4</b></p>
+               <!--  </span>
                 <?php echo '<img src="data:image;base64,'.base64_encode($rec_img).' "  style="width: 55px; height: 55px;" >' ;   ?>
                 <span>
-                    <p style="color:#979797;line-height:1px ">Recruiter</p>
-                    <p style="color:#3598DB;line-height:1px "><b><?php echo $recruiters_name; ?></b></p>
-                    <p style="color:#333333"><?php echo $company_email; ?></p>
+ -->                    <p style="color:#979797;line-height:1px ">Recruiter</p>
+                    <!-- <p style="color:#3598DB;line-height:1px "><b><?php echo $recruiters_name; ?></b></p> -->
+                    <!-- <p style="color:#333333"><?php echo $company_email; ?></p> -->
                 </span>
             </div>
             <?php
