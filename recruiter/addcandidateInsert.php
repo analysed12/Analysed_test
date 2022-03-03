@@ -17,8 +17,8 @@ if (isset($_POST['submit']))      //condition to insert set of variable if submi
 
             // query to insert all the data to dataBase
 
-            $qr1 = 'insert into candidates(image,Firstname,Lastname,Emailid,Phonenumber,Birthdate,Industry,Address,Ownership,Cityname,Zipcode,State,CurrentTitle,CompanyName,CandidateType,EmploymentPreference,Source,Recruiter,CurrentSalary,SalaryRange1,SalaryRange2,talents,resume,skills,qualification,
-            candidateComment,availability,job,accessebility,reasonType,added_On)values("'.$_SESSION['image'].'","'.$_SESSION['firstname'].'",
+            $qr1 = 'insert into candidates(image,Firstname,Lastname,candidate_email,phone_no,birth_date,status,address,country,city_name,zipcode,state,current_title,company_name,candidate_type,emp_preference,source,recruiter,current_salary,salary_range1,salary_range2,talents,resume,skills,qualifications,
+            	comment,availability_date,job,accessibility,response_type,last_updated)values("'.$_SESSION['image'].'","'.$_SESSION['firstname'].'",
             "'.$_SESSION['lastname'].'",
             "'.$_SESSION['emailid'].'",
             "'.$_SESSION['phonenumber'].'",
@@ -48,7 +48,7 @@ if (isset($_POST['submit']))      //condition to insert set of variable if submi
             "'.$_SESSION['accessebility'].'",
             "'.$_SESSION['reasonType'].'",NOW())';
 
-            $res = mysqli_query($con,$qr1);  // to check wether query has worked or not
+            $res = mysqli_query($conn,$qr1);  // to check wether query has worked or not
 
             if ($res) {
 
@@ -57,6 +57,3 @@ if (isset($_POST['submit']))      //condition to insert set of variable if submi
             }
 }
 ?>
-
-<!--  "'.$_SESSION['resume'].'", -->
-<!--  "'.$_SESSION['image'].'", -->
