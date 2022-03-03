@@ -14,14 +14,14 @@ if (isset($_POST['next']))
     $_SESSION['Package']    = $_POST['Package'];
     $_SESSION['Bill_rate'] = $_POST['Bill_rate'];
     $_SESSION['Markup']   = $_POST['Markup'];
-    $_SESSION['Cl_margin']   = $_POST['Client_margin'];
+    $_SESSION['Cl_margin']   = $_POST['client_margin'];
     $_SESSION['Days_on']   = $_POST['Days_on'];
     $_SESSION['Days_off']   = $_POST['Days_off'];
     $_SESSION['Shift_pattern']   = $_POST['Shift_pattern'];
 
 
             // query to insert all the data to dataBase
-            $qr1 = 'insert into createrecruitment(job_description,Position,Industry,Jobtype,client_company,Contact_at_client_company,Business_Development_Manager,Status,Priority,Job_reference_number,Designation,Recruiters_name,Number_of_openings,Start_Date,End_Date,Joblocation1,Joblocation2,Joblocation3,Starting_time,Ending_time,Client_margin,Contact_information_for_the_advert,advert_contact_no,skills,Qualifications,Eligibility_criteria,Experience_requirement,Relevant_experience,Irrelevant_experience,Roles_and_responsibilities,Growth_oppurtunities,Learning_oppurtunities,Employeee_endorsements,Employee_benefits,Reputation_of_organisation,advert_Job_description,Workspace_view,Transportation,Package_type,Package_duration,Package,Bill_rate,Markup,cl_margin,Days_on,Days_off,Shift_pattern,added_On)values("'.$_SESSION['job_description'].'","'.$_SESSION['Position'].'",
+            $qr1 = 'insert into joblistings(job_description,position,industry,job_type,client_company,contact_client_company,business_dev_manager,status,priority,	job_reference_number,designation,recruiters_name,openings,start_date,end_date,country,state,district,starting_time,ending_time,client_margin,advert_contact_name,advert_contact_no,skills,qualification,eligibility_criteria,required_experience,relevant_experience,irrelevant_experience,roles_and_opportunity,growth_opportunity,learning_opportunity,emp_endorsement,emp_benefits,reputation_of_org,advert_job_description,workspace_view,transportation,package_type,package_duration,package,bill_rate,markup,cl_margin,days_on,days_off,shift_pattern,added_On)values("'.$_SESSION['job_description'].'","'.$_SESSION['Position'].'",
             "'.$_SESSION['Industry'].'",
             "'.$_SESSION['Jobtype'].'",
             "'.$_SESSION['client_company'].'",
@@ -63,12 +63,12 @@ if (isset($_POST['next']))
             "'.$_SESSION['Package'].'",
             "'.$_SESSION['Bill_rate'].'",
             "'.$_SESSION['Markup'].'",
-            "'.$_SESSION['cl_margin'].'",
+            "'.$_SESSION['Cl_margin'].'",
             "'.$_SESSION['Days_on'].'",
             "'.$_SESSION['Days_off'].'",
             "'.$_SESSION['Shift_pattern'].'",NOW())';
 
-            $res = mysqli_query($con,$qr1);         // to check wether query has worked or not
+            $res = mysqli_query($conn,$qr1);         // to check wether query has worked or not
             if ($res) {
 
                  // if query has worked properly it will redirect to following page

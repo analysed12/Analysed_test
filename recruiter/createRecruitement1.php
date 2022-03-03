@@ -43,6 +43,18 @@
         echo "something wrong";
     }
 
+    $td="../img/";
+    $tf=$td.basename($_FILES["file"]["name"]);
+
+    $_SESSION['job_description']  = basename($_FILES["file"]["name"]);
+
+    $move= move_uploaded_file($_FILES["file"]["tmp_name"] , $tf);
+
+    if (!($move)) {
+
+        echo "something wrong";
+    }
+
 ?>
 
 <?php include('header.php')?>
