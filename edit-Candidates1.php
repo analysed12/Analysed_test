@@ -83,7 +83,7 @@
                 <?php
 
                   $_SESSION['cid']=$_GET['edit_Candidates'];
-                $sql=mysqli_query($con,"select * from candidates where candidate_id='".$_SESSION['cid']."'");
+                $sql=mysqli_query($conn,"select * from candidates where candidate_id='".$_SESSION['cid']."'");
                 $check=mysqli_num_rows($sql)>0;
                 if($check){
                     while($row=mysqli_fetch_assoc($sql)){
@@ -117,20 +117,20 @@
                                     </p>
                                     <p class="input-para-add-client-ekam-1 fx-city-name-1">
                                         <label for="default-input-for-no.1">Email-ID*</label>
-                                        <input type="email" name="emailid" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['emailid']; ?>" >
+                                        <input type="email" name="emailid" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['candidate_email']; ?>" >
                                     </p>
                                     <div class="input-signup-div fx-city-name-1">
                                         <label for="input-first-name">Phone number</label>
-                                        <div class="phn-number-div row-signup"  style="flex-wrap: nowrap;"><select name="code"><option value="+91" >+91</option></select><input type="tel" maxlength='10' name="phonenumber" placeholder="Phone number" id="input-first-name" class="phn-number--input-signup" value="<?php echo $row['phonenumber']; ?>" ></div>
+                                        <div class="phn-number-div row-signup"  style="flex-wrap: nowrap;"><select name="code"><option value="+91" >+91</option></select><input type="tel" maxlength='10' name="phonenumber" placeholder="Phone number" id="input-first-name" class="phn-number--input-signup" value="<?php echo $row['phone_no']; ?>" ></div>
                                     </div>
                                     <p class="input-para-add-client-ekam-1 fx-city-name-1">
                                         <label for="default-input-for-no.1">Birth Date*</label>
-                                        <input type="date" name="birthdate" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['birthdate']; ?>"  >
+                                        <input type="date" name="birthdate" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['birth_date']; ?>"  >
                                     </p>
                                     <p class="select-for-select-image-box-below-inputs fx-city-name-1">
                                         <label for="default-select-for-no.3">Status</label>
                                             <select name="Industry" id="default-select-for-no.3" class="default-select-for-add-client-1">
-                                                <option value="<?php echo $row['Industry']; ?>" default><?php echo $row['Industry']; ?></option>
+                                                <option value="<?php echo $row['status']; ?>" default><?php echo $row['status']; ?></option>
                                                 <option value="Active">Active</option>
                                                 <option value="Inactive">Inactive</option>
 
@@ -143,7 +143,7 @@
                                     <p  class="input-para-add-client-ekam-1 fx-city-name-1">
                                         <label for="default-select-for-no.2">Country</label>
                                         <select name="ownership" id="default-select-for-no.2" class="default-select-for-add-client-1">
-                                            <option value="<?php echo $row['ownership']; ?>"  default><?php echo $row['ownership']; ?></option>
+                                            <option value="<?php echo $row['country']; ?>"  default><?php echo $row['country']; ?></option>
                                             <option value="India">India</option>
                                             <option value="Australia">Australia</option>
                                             <option value="Germany">Germany</option>
@@ -151,16 +151,16 @@
                                     </p>
                                     <p class="input-para-add-client-ekam-1  fx-city-name-1">
                                         <label for="default-select-for-no.13">City name</label>
-                                        <input id="default-select-for-no.13" name="cityname" type="text" class="default-input-for-add-client-1" placeholder="Enter your city name" value="<?php echo $row['cityname']; ?>" >
+                                        <input id="default-select-for-no.13" name="cityname" type="text" class="default-input-for-add-client-1" placeholder="Enter your city name" value="<?php echo $row['city_name']; ?>" >
                                     </p>
                                     <p class="input-para-add-client-ekam-1  fx-city-name-1">
                                             <label for="default-select-for-no.13">Zipcode</label>
-                                            <input id="default-select-for-no.13" name="Zipcode" type="text" class="default-input-for-add-client-1" placeholder="Enter zipcode of city" value="<?php echo $row['Zipcode']; ?>" >
+                                            <input id="default-select-for-no.13" name="Zipcode" type="text" class="default-input-for-add-client-1" placeholder="Enter zipcode of city" value="<?php echo $row['zipcode']; ?>" >
                                     </p>
                                     <p class="select-for-select-image-box-below-inputs  fx-city-name-1">
                                         <label for="default-select-for-no.6">State</label>
                                             <select name="State" id="default-select-for-no.6" class="default-select-for-add-client-1">
-                                                <option value="<?php echo $row['State']; ?>"  default><?php echo $row['State']; ?></option>
+                                                <option value="<?php echo $row['state']; ?>"  default><?php echo $row['state']; ?></option>
                                                 <option value="Andhra Pradesh" default>Andhra Pradesh</option>
                                                 <option value="Tamil Nadu">Tamil Nadu</option>
                                                 <option value="Uttar Pradesh">Uttar Pradesh</option>

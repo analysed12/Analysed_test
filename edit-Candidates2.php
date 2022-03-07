@@ -64,7 +64,7 @@ if (isset($_POST['next'])) {
 
 
 
-                                 $sql=mysqli_query($con,"select * from candidates where candidate_id='".$_SESSION['cid']."'");
+                                 $sql=mysqli_query($conn,"select * from candidates where candidate_id='".$_SESSION['cid']."'");
                                  $check=mysqli_num_rows($sql)>0;
                                  if($check){
                                      while($row=mysqli_fetch_assoc($sql)){
@@ -75,16 +75,16 @@ if (isset($_POST['next'])) {
                                 <div class="row-recruiter sub-divs-image-box-right-side-add-client">
                                     <p class="input-para-add-client-ekam-1 fx-city-name-1">
                                         <label for="default-input-for-no.1">Current Title*</label>
-                                        <input type="text" name="currentTitle" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['currentTitle']; ?>" required />
+                                        <input type="text" name="currentTitle" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['current_title']; ?>" required />
                                     </p>
                                     <p class="input-para-add-client-ekam-1 fx-city-name-1">
                                         <label for="default-input-for-no.1">Company Name*</label>
-                                        <input type="text" name="companyName" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['companyName']; ?>" required />
+                                        <input type="text" name="companyName" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['company_name']; ?>" required />
                                     </p>
                                     <p class="input-para-add-client-ekam-1 right-side fx-city-name-1">
                                         <label for="default-select-for-no1 ">Candidate Type*</label>
                                         <select name="candidateType" id="default-select-for-no.1" class="default-select-for-add-client-1" required />
-                                            <option value="<?php echo $row['candidateType']; ?>" default><?php echo $row['candidateType']; ?></option>
+                                            <option value="<?php echo $row['candidate_type']; ?>" default><?php echo $row['candidate_type']; ?></option>
                                             <option value="Contract">Contract</option>
                                             <option value="Temporary">Temporary</option>
                                             <option value="Permanent">Permanent</option>
@@ -93,7 +93,7 @@ if (isset($_POST['next'])) {
                                     <p class="select-for-select-image-box-below-inputs fx-city-name-1">
                                         <label for="default-select-for-no.3">Employment Preference*</label>
                                             <select name="employmentPreference" id="default-select-for-no.3" class="default-select-for-add-client-1" required />
-                                                <option value="<?php echo $row['employmentPreference']; ?>" default><?php echo $row['employmentPreference']; ?></option>
+                                                <option value="<?php echo $row['emp_preference']; ?>" default><?php echo $row['emp_preference']; ?></option>
                                                 <option value="Temporary to permanent">Temporary to permanent</option>
                                                 <option value="Temporary">Temporary</option>
                                                 <option value="Permanent">Permanent</option>
@@ -120,13 +120,13 @@ if (isset($_POST['next'])) {
 
                                     <p class="input-para-add-client-ekam-1 fx-city-name-1 ">
                                         <label for="default-input-for-no.2">Current Salary*</label>
-                                        <input type="text" name="currentSalary" class="default-input-for-add-client-1" placeholder="Company URL" id="default-input-for-no.2" value="<?php echo $row['currentSalary']; ?>" required />
+                                        <input type="text" name="currentSalary" class="default-input-for-add-client-1" placeholder="Company URL" id="default-input-for-no.2" value="<?php echo $row['current_salary']; ?>" required />
                                     </p>
                                     <span class="input-para-add-client-ekam-1 desired-salary-p">
                                         <label for="default-input-for-no.2">Desired Salary Range*</label>
                                         <span class="row-recruiter">
-                                            <input type="text" name="salaryRange1" class="default-input-for-add-client-1 desired-salary" placeholder="Company URL" id="default-input-for-no.2" value="<?php echo $row['salaryRange1']; ?>" required /> to
-                                            <input type="text" name="salaryRange2" class="default-input-for-add-client-1 desired-salary" placeholder="Company URL" id="default-input-for-no.2" value="<?php echo $row['salaryRange2']; ?>" required />
+                                            <input type="text" name="salaryRange1" class="default-input-for-add-client-1 desired-salary" placeholder="Company URL" id="default-input-for-no.2" value="<?php echo $row['salary_range1']; ?>" required /> to
+                                            <input type="text" name="salaryRange2" class="default-input-for-add-client-1 desired-salary" placeholder="Company URL" id="default-input-for-no.2" value="<?php echo $row['salary_range2']; ?>" required />
                                         </span>
                                     </span>
                                 </div>

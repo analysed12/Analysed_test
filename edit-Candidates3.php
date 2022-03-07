@@ -50,7 +50,7 @@ session_start();      //session has been started
 
 
 
-                                $sql=mysqli_query($con,"select * from candidates where candidate_id='".$_SESSION['cid']."'");
+                                $sql=mysqli_query($conn,"select * from candidates where candidate_id='".$_SESSION['cid']."'");
                                 $check=mysqli_num_rows($sql)>0;
                                 if($check){
                                     while($row=mysqli_fetch_assoc($sql)){
@@ -75,7 +75,7 @@ session_start();      //session has been started
                                     <p class="input-para-add-client-ekam-1 right-side fx-city-name-1">
                                         <label for="default-select-for-no1 ">Qualification*</label>
                                         <select name="qualification" id="default-select-for-no.1" class="default-select-for-add-client-1" required />
-                                            <option value="<?php echo $row['qualification']; ?>" default><?php echo $row['qualification']; ?></option>
+                                            <option value="<?php echo $row['qualifications']; ?>" default><?php echo $row['qualifications']; ?></option>
                                             <option value="MSc">MSc</option>
                                             <option value="BSc">BSc</option>
                                             <option value="BCom">B.Com</option>

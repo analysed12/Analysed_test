@@ -57,7 +57,7 @@ if (isset($_POST['next'])) {
 
 
 
-                                $sql=mysqli_query($con,"select * from candidates where candidate_id='".$_SESSION['cid']."'");
+                                $sql=mysqli_query($conn,"select * from candidates where candidate_id='".$_SESSION['cid']."'");
                                 $check=mysqli_num_rows($sql)>0;
                                 if($check){
                                     while($row=mysqli_fetch_assoc($sql)){
@@ -68,11 +68,11 @@ if (isset($_POST['next'])) {
                                 <div class="row-recruiter sub-divs-image-box-right-side-add-client">
                                     <p class="input-para-add-client-ekam-1">
                                         <label for="default-input-for-no.1">Candidates Comments*</label>
-                                        <input type="text" name="candidateComment" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['candidateComment']; ?>" required />
+                                        <input type="text" name="candidateComment" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['comment']; ?>" required />
                                     </p>
                                     <p class="input-para-add-client-ekam-1">
                                         <label for="default-input-for-no.1">Availability Date*</label>
-                                        <input type="date" name="availability" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['availability']; ?>" required />
+                                        <input type="date" name="availability" class="default-input-for-add-client-1" placeholder="Company name" id="default-input-for-no.1" value="<?php echo $row['availability_date']; ?>" required />
                                     </p>
                                     <p class="select-for-select-image-box-below-inputs  fx-city-name-1">
                                         <label for="default-select-for-no.6">Job*</label>
@@ -86,7 +86,7 @@ if (isset($_POST['next'])) {
                                     <p class="select-for-select-image-box-below-inputs  fx-city-name-1">
                                         <label for="default-select-for-no.6">Accessibility*</label>
                                             <select name="accessebility" id="default-select-for-no.6" class="default-select-for-add-client-1" required />
-                                                <option value="<?php echo $row['accessebility']; ?>" default><?php echo $row['accessebility']; ?></option>
+                                                <option value="<?php echo $row['accessibility']; ?>" default><?php echo $row['accessibility']; ?></option>
                                                 <option value="Internal">Internal</option>
                                                 <option value="External">External</option>
                                             </select>
@@ -94,7 +94,7 @@ if (isset($_POST['next'])) {
                                     <p class="select-for-select-image-box-below-inputs  fx-city-name-1">
                                         <label for="default-select-for-no.6">Response type*</label>
                                             <select name="reasonType" id="default-select-for-no.6" class="default-select-for-add-client-1" required />
-                                                <option value="<?php echo $row['reasonType']; ?>" default><?php echo $row['reasonType']; ?></option>
+                                                <option value="<?php echo $row['response_type']; ?>" default><?php echo $row['response_type']; ?></option>
                                                 <option value="Web response">Web response</option>
                                                 <option value="Submission">Submission</option>
                                             </select>
