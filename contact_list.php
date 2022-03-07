@@ -23,7 +23,7 @@
          <form action="" method="post">
             <div>
             <a href="/" class="sub_1">Create new contact and manage old ones</a>
-            <button class="addFilesMyTasks1" href="addContact.php">Add + </button>
+            <button class="addFilesMyTasks1" href="\Analysed_test-main\recruiter\addContact.php">Add + </button>
             </div>
 
             <div class="container" style="margin-left:-2%;">
@@ -58,10 +58,10 @@
                              // code block to search according to given clauses
                             $search = $_POST['searchForNames'];
                             $search = preg_replace("#[^0-9a-z]#i","",$search);
-                            $sql= "select * from addcontact WHERE fname like '%$search%' OR lname like '%$search%' ";
+                            $sql= "select * from contacts WHERE fname like '%$search%' OR lname like '%$search%' ";
 
                             // query to establish connection from database and get the output of required query
-                            $run = mysqli_query($con,$sql);
+                            $run = mysqli_query($conn,$sql);
                             $i= 1;
 
                             // displaying all the data from the table
@@ -71,7 +71,7 @@
 
                             <div class="singletask_myTasks">
                             <input type="checkbox" name="checkBoxItem" style="border: 1px solid #3598db;" >
-                            <img src="upload/<?php echo $row['image']; ?>" width="65" height="65">
+                            <img src="upload/<?php echo $row['picture']; ?>" width="65" height="65">
                             <span >
                             <p id="k1"><?php echo $row['fname'] ; ?></p>
                             <p id="k2">Company Name</p>
@@ -90,7 +90,7 @@
                             </span>&emsp;&emsp;
                              <span>
                             <p id="k2">Added on
-                            <span style="color:#333333"><?php echo $row['added_On']; ?></span></o>
+                            <span style="color:#333333"><?php echo $row['added_on']; ?></span></o>
                                 <div class="button-div_myTasks">
                                     <p style="color:#3598DB">&nbsp;Edit <i class="fa fa-edit" aria-hidden="true"></i>
                                     <span style="font-size:14px;color:#EC4551">&emsp;&emsp;&emsp;&emsp;&emsp;Delete <i class="fa fa-trash" aria-hidden="true"></i></span></p>
@@ -106,9 +106,9 @@
 
                              if(!isset($_POST['searchForNames'])){
                                // code block for all data to be displayed if there are no clauses
-                                $sql= "select * from addcontact ";
+                                $sql= "select * from contacts ";
                                 // query to establish connection from database and get the output of required query
-                                $run = mysqli_query($con,$sql);
+                                $run = mysqli_query($conn,$sql);
                                 $i= 1;
 
 
@@ -118,7 +118,7 @@
                         ?>
                 <div class="singletask_myTasks">
                 <input type="checkbox" name="checkBoxItem" style="border: 1px solid #3598db;" >
-                <img src="upload/<?php echo $row['image']; ?>" width="65" height="65">
+                <img src="upload/<?php echo $row['picture']; ?>" width="65" height="65">
                 <span >
                     <p id="k1"><?php echo $row['fname'] ; ?></p>
                     <p id="k2">Company Name</p>
@@ -137,7 +137,7 @@
                 </span>&emsp;&emsp;
                 <span>
                     <p id="k2">Added on
-                    <span style="color:#333333"><?php echo $row['added_On']; ?></span></p>
+                    <span style="color:#333333"><?php echo $row['added_on']; ?></span></p>
                     <div class="button-div_myTasks">
                         <p style="color:#3598DB">&nbsp;Edit <i class="fa fa-edit" aria-hidden="true"></i>
                         <span style="font-size:14px;color:#EC4551">&emsp;&emsp;&emsp;&emsp;&emsp;Delete <i class="fa fa-trash" aria-hidden="true"></i></span></p>

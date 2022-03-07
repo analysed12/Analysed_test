@@ -1,8 +1,8 @@
 
 <?php
 
-   include 'connection1.php';      //database connection page included
-   session_start();        //session has been started
+   include 'connection1.php';
+   session_start();
 ?>
 
 
@@ -11,9 +11,8 @@
 <link rel="stylesheet" href="./css/client_list.css">
 <title>Analysed</title>
 
-<?php
 
- ?>
+
 <body>
 <div class="container">
 <div class="small_container-1">
@@ -22,7 +21,7 @@
                 <p class="mainParaDash">create new client and manage old ones</p>
             </div>
             <span>
-                <button class="btn" id="myBtn" type="button" href="addClient.php">Add +</button>
+                <button class="btn" id="myBtn" type="button">Add +</button>
             </span>
             <div class="search-box">
                 <details id="dropdown" class="dropdown">
@@ -55,7 +54,7 @@
                 <button type="submit" name="btnsearch" class="searchButton">
                     <img src="./img/search-icon-blue.png" />
                 </button>
-
+              </form>
             </div>
             <div class="row-flex-jobj justifycontent-flex-end-1">
                 <p class="sortbyText">Sort by :
@@ -76,31 +75,23 @@
         $flag=0;
         if(isset($_POST['btnsearch']))
         {
-          // code block to search according to given clauses
           $textsearch=$_POST['textsearch'];
           $sql="SELECT * FROM `client` WHERE company_name='$textsearch'";
           $flag=1;
         }
-
         if($flag == 0)
         {
-          // code block for all data to be displayed if there are no clauses
             $sql="select * from client";
         }
 
-          // query to establish connection from database and get the output of required query
-          $res=mysqli_query($con,$sql);
+          $res=mysqli_query($conn,$sql);
           if($res == TRUE)
           {
-              // getting no of rows from table and assigning it to a variable. If this is more than 0 then all rows will be printed
               $count=mysqli_num_rows($res);
               if($count >0)
               {
-                  // displaying all the data from the table
                   while($rows=mysqli_fetch_assoc($res))
                   {
-
-
                ?>
                 <div class="row" >
                     <div class="column">
@@ -109,7 +100,7 @@
                     </div>
                     <div class="column">
 
-                       <img src="upload/<?php echo $rows['image']; ?>" width="65" height="65">
+                       <img src="upload/<?php echo $rows['company_img']; ?>" width="65" height="65">
                     </div>
                     <div class="column">
                        <p class="col-1"><?php echo $rows['active_contact']; ?></p>
@@ -128,7 +119,7 @@
                         <span class="col-span-4"><i class="fa fa-bell" aria-hidden="true"></i> Remainder</span>
                     </div>
                     <div class="column">
-                        <p class="col-5">Added on <span><?php echo $rows['added_On']; ?></span></p>
+                        <p class="col-5">Added on <span><?php echo $rows['last_updated']; ?></span></p>
                         <span class="col-span-5"><i class="fa fa-pencil" aria-hidden="true"></i> Edit<span>
                           <a href="delete_client_list.php?Id=<?php echo $client_id; ?>"><button ><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></a>
                     </div>
@@ -142,7 +133,7 @@
         ?>
 
 
-            </form>
+
 
             </div>
         </div>

@@ -152,7 +152,7 @@
          $sql="select * from candidates";
      }
         // query to establish connection from database and get the output of required query
-       $res=mysqli_query($con,$sql);
+       $res=mysqli_query($conn,$sql);
        if($res == TRUE)
        {
           // getting no of rows from table and assigning it to a variable. If this is more than 0 then all rows will be printed
@@ -167,13 +167,13 @@
             ?>
             <div class="list">
             <input type="checkbox">
-            <div class="added"><span style="color:979797"><?php echo $row['added_On']; ?></span> <br>#JB13069</div>
+            <div class="added"><span style="color:979797"><?php echo $row['last_updated']; ?></span> <br><?php echo $row['candidate_id']; ?></div>
             <img src="upload/<?php echo $row['image']; ?>" width="70" height="70" alt="">
 
             <div class="uploaded">Uploaded by<br>
             <?php echo $row['firstname']; ?></div>
-            <div class="added1"><span style="color:979797"><?php echo $row['companyName'] ; ?></span><br><?php echo $row['currentTitle'];?></div><br>
-            <div class="added2"><span style="color:979797">Status</span><br><?php echo $row['Industry'];?></div>
+            <div class="added1"><span style="color:979797"><?php echo $row['company_name'] ; ?></span><br><?php echo $row['current_title'];?></div><br>
+            <div class="added2"><span style="color:979797">Status</span><br><?php echo $row['status'];?></div>
             <p><a href="edit-Candidates1.php?edit_Candidates=<?php echo $row['candidate_id'];?>">Peek<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
             <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
