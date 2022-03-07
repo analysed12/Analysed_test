@@ -1,23 +1,18 @@
+
+<?php
+
+   include 'connection1.php';
+   session_start();
+?>
+
+
 <?php include('header.php')?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./css/client_list.css">
 <title>Analysed</title>
-<?php
-   define('LOCALHOST','localhost');
-   define('DB_USERNAME','root');
-   define('DB_PASSWORD','');
-   define('DB_NAME','analyse');
-   $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
-?>
-<?php
-   $flag=0;
-   if(isset($_POST['btnsearch']))
-   {
-     $textsearch=$_POST['textsearch'];
-     $sql="SELECT * FROM `client` WHERE company_name='$textsearch'";
-     $flag=1;
-   }
- ?>
+
+
+
 <body>
 <div class="container">
 <div class="small_container-1">
@@ -77,6 +72,13 @@
                 </div>
 
         <?php
+        $flag=0;
+        if(isset($_POST['btnsearch']))
+        {
+          $textsearch=$_POST['textsearch'];
+          $sql="SELECT * FROM `client` WHERE company_name='$textsearch'";
+          $flag=1;
+        }
         if($flag == 0)
         {
             $sql="select * from client";
@@ -90,16 +92,6 @@
               {
                   while($rows=mysqli_fetch_assoc($res))
                   {
-                      $client_id=$rows['client_id'];
-                      $client_img=$rows['client_img'];
-                      $name=$rows['name'];
-                      $company_name=$rows['company_name'];
-                      $role=$rows['role'];
-                      $role_detail=$rows['role_detail'];
-                      $main_email=$rows['main_email'];
-                      $contact_no=$rows['contact_no'];
-                      $added_on=$rows['added_on'];
-
                ?>
                 <div class="row" >
                     <div class="column">
@@ -108,26 +100,26 @@
                     </div>
                     <div class="column">
 
-                        <?php echo '<img src="data:image;base64,'.base64_encode($client_img).' "  style="width: 55px; height: 55px;" >' ;   ?>
+                       <img src="upload/<?php echo $rows['company_img']; ?>" width="65" height="65">
                     </div>
                     <div class="column">
-                        <p class="col-1"><?php echo $name; ?></p>
-                        <span class="col-span-1"><?php echo $company_name; ?></span>
+                       <p class="col-1"><?php echo $rows['active_contact']; ?></p>
+                        <span class="col-span-1"><?php echo $rows['company_name']; ?></span>
                     </div>
-                    <div class="column">
+                    <!-- <div class="column">
                         <p class="col-2"><?php echo $role; ?></p>
                         <span class="col-span-2"><?php echo $role_detail; ?></span>
-                    </div>
+                    </div> -->
                     <div class="column">
-                        <p class="col-3"><?php echo $contact_no; ?></p>
-                        <span class="col-span-3"><?php echo $main_email; ?></span>
+                        <p class="col-3"><?php echo $rows['contact_no']; ?></p>
+                        <span class="col-span-3"><?php echo $rows['main_email']; ?></span>
                     </div>
                     <div class="column">
                         <p class="col-4"><i class="fa fa-sticky-note" aria-hidden="true"></i> Note</p>
                         <span class="col-span-4"><i class="fa fa-bell" aria-hidden="true"></i> Remainder</span>
                     </div>
                     <div class="column">
-                        <p class="col-5">Added on <span>05-05-2020 </span></p>
+                        <p class="col-5">Added on <span><?php echo $rows['last_updated']; ?></span></p>
                         <span class="col-span-5"><i class="fa fa-pencil" aria-hidden="true"></i> Edit<span>
                           <a href="delete_client_list.php?Id=<?php echo $client_id; ?>"><button ><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></a>
                     </div>
@@ -139,6 +131,8 @@
              }
          }
         ?>
+
+
 
 
             </div>
