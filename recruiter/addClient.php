@@ -1,6 +1,6 @@
 <?php
    include 'connection1.php';      //database connection page included
-session_start();            //session has been started
+   session_start();            //session has been started
 
 
 ?>
