@@ -28,10 +28,10 @@
 <link rel="stylesheet" href="css/js_nearby_job.css">
 <!-- <link rel="stylesheet" href="./css/js_more_jobs.css"> -->
 <body>
-
+    
     <br>
     <div class="bread-crumbs_Mytools-recruiter">
-     <a href="js_dashboard.php" class="active-breadcrumb-link">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>Dashboard</u> </a><span style="color:#3598DB"> > </span> 
+     <a href="" class="active-breadcrumb-link">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>Dashboard</u> </a><span style="color:#3598DB"> > </span> 
      <a href="" class="active-breadcrumb-link"><u> Nearby_Jobs </u></a>
     </div>
     <br><br>
@@ -39,7 +39,7 @@
        <div class="container">
          <p class="a1">Nearby Jobs <img src="./img/js_near1.png" height="40" weight="40"></p>
          <div class="row">
-            <div class="col-2">
+            <div class="col-2">               
                     <label id="b1" >Sort by:&emsp;<a href="/" class="active-breadcrumb-link">Recent</a> </label>
             </div>
             <div class="col-3">
@@ -47,7 +47,7 @@
             </div>
             </div>
             <br>
-
+       
         <div class="row">
             <div class="col-9">
                 <div class="row">
@@ -77,7 +77,7 @@
                             <div style="margin-left:20px;">
                             <p style="font-size:13px ;color :#0F9D58"><img src="./img/locat-icon.png" height="11" weight="15"> Appt no 23, road name, Area na..</p>
                         </div>
-                        <br>
+                        <br> 
                             <div class="last_job_content" style="margin-left:20px;">
                                 <p id="first">Full Time</p>
                                 <a href="#" id="second">Apply Now</a>
@@ -150,7 +150,7 @@
                                 <a href="#" id="second">Apply Now</a>
                             </div>
                         </div>
-
+                    
                     </div>
                 </div>
 
@@ -258,7 +258,7 @@
 
                     </div>
                 </div>
-
+                    
             </div>
 
             <div class="col-3 mb-4">
@@ -267,7 +267,7 @@
                         Pay type salary<br>
                         <div class="sal2">
                             <input type="text" style="float: left; " placeholder=" &emsp;Min" class="f2" >
-                            <input type="text" style="float:right;" placeholder="&emsp; Max" class="f3" ></p>
+                            <input type="text" style="float:right;" placeholder="&emsp; Max" class="f3" ></p>                            
                         </div>
                         <p id="f1" style="margin-top:20px">Industry</p>
                         <select title="Status" class="sel">
@@ -298,8 +298,8 @@
             </div>
          </div>
          <!--end of row -->
-
-     </div>
+         
+     </div> 
 
     </div>
 </body>

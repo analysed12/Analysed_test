@@ -1,12 +1,16 @@
-<?php include('include/header.php')?>
 
 <?php
-   define('LOCALHOST','localhost');
-   define('DB_USERNAME','root');
-   define('DB_PASSWORD','');
-   define('DB_NAME','analyse');
-   $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
+
+   include 'connection1.php';
+   session_start();
 ?>
+
+
+
+
+<?php include('include/header.php')?>
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
@@ -39,8 +43,8 @@
 
     <br>
     <div class="bread-crumbs_Mytools-recruiter">
-     <a href="js_dashboard.php" class="active-breadcrumb-link">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>Dashboard</u> </a><span style="color:#3598DB"> > </span>
-     <a href="suggestedjobs.php" class="active-breadcrumb-link"><u> Suggested_Jobs </u></a>
+     <a href="" class="active-breadcrumb-link">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>Dashboard</u> </a><span style="color:#3598DB"> > </span>
+     <a href="" class="active-breadcrumb-link"><u> Suggested_Jobs </u></a>
     </div>
     <br><br>
     <div class="main_body">

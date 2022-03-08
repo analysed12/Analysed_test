@@ -1,13 +1,17 @@
-<?php include('include/header.php') ?>
 
 
 <?php
-   define('LOCALHOST','localhost');
-   define('DB_USERNAME','root');
-   define('DB_PASSWORD','');
-   define('DB_NAME','analyse');
-   $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
+
+   include 'connection1.php';
+   session_start();
 ?>
+
+
+
+<?php include('include/header.php') ?>
+
+
+
 
 
 
@@ -45,32 +49,34 @@
 $flag=0;
 if(isset($_POST['btnall']))
 {
-  $sql1="SELECT * FROM `job_list`";
+  $sql1="SELECT * FROM `joblistings`";
   $flag=1;
 }
 
 if(isset($_POST['btnshortlisted']))
 {
-  $sql1="SELECT * FROM `job_list` WHERE status='Shortlisted'";
+  $sql1="SELECT * FROM `joblistings` WHERE status='Shortlisted'";
   $flag=1;
 }
 
 if(isset($_POST['btnhired']))
 {
-  $sql1="SELECT * FROM `job_list` WHERE status='Approved'";
+  $sql1="SELECT * FROM `joblistings` WHERE status='Approved'";
   $flag=1;
 }
 
 if(isset($_POST['btnsearch']))
 {
   $cname=$_POST['FileName_myTasks'];
-  $sql1 ="SELECT * FROM `job_list` WHERE contact_client_company='$cname' ";
+  $sql1 ="SELECT * FROM `joblistings` WHERE contact_client_company='$cname' ";
   $flag=1;
 }
  ?>
 
 <?php
-$j_id=$_GET['j_id'];
+
+
+            $j_id=$_GET['j_id'];
             $sql="select * from joblistings where job_id='$j_id'";
             $res=mysqli_query($conn,$sql);
             if($res == TRUE)
@@ -100,13 +106,13 @@ $j_id=$_GET['j_id'];
                         $emp_benefits=$rows['emp_benefits'];
                         $advert_job_description=$rows['advert_job_description'];
                         $advert_contact_name=$rows['advert_contact_name'];
-                        $company_email=$rows['company_email'];
+                        // $company_email=$rows['company_email'];
                         $advert_contact_no=$rows['advert_contact_no'];
                         $district=$rows['district'];
                         $state=$rows['state'];
                         $country=$rows['country'];
                         $job_type=$rows['job_type'];
-                        $job_views=$rows['job_views'];
+                        // $job_views=$rows['job_views'];
                         $status=$rows['status'];
 
                         $job_id=$rows['job_id'];
@@ -215,7 +221,7 @@ $j_id=$_GET['j_id'];
             $district=$_POST['district'];
             $btnfilter=$_POST['btnfilter'];
 
-            $sql1="SELECT * FROM `job_list` WHERE qualification='$qualification' AND required_experience='$experience' AND country='$country' AND state='$state' AND district='$district'";
+            $sql1="SELECT * FROM `joblistings` WHERE qualification='$qualification' AND required_experience='$experience' AND country='$country' AND state='$state' AND district='$district'";
 
             $flag=1;
         }
@@ -229,7 +235,7 @@ $j_id=$_GET['j_id'];
                     <option value="0">required qualification&emsp; v</option>
 
                     <?php
-                        $sql2="SELECT DISTINCT qualification from job_list";
+                        $sql2="SELECT DISTINCT qualification from joblistings";
                         $res2=mysqli_query($conn,$sql2);
                         if($res2 == TRUE)
                         {
@@ -258,7 +264,7 @@ $j_id=$_GET['j_id'];
                     <select name="experience" id="val2" style="color:#3598DB;">
                     <option value="0">Enter</option>
                     <?php
-                        $sql2="SELECT DISTINCT required_experience from job_list";
+                        $sql2="SELECT DISTINCT required_experience from joblistings";
                         $res2=mysqli_query($conn,$sql2);
                         if($res2 == TRUE)
                         {
@@ -284,7 +290,7 @@ $j_id=$_GET['j_id'];
                     <select name="country" id="val1" style="color:#3598DB;">
                     <option value="0">Select country&emsp;&emsp;&emsp;&emsp; v</option>
                     <?php
-                        $sql2="SELECT DISTINCT country from job_list";
+                        $sql2="SELECT DISTINCT country from joblistings";
                         $res2=mysqli_query($conn,$sql2);
                         if($res2 == TRUE)
                         {
@@ -310,7 +316,7 @@ $j_id=$_GET['j_id'];
                     <select name="state" id="val3" style="color:#3598DB;">
                     <option value="0">Select state&emsp; v</option>
                     <?php
-                        $sql2="SELECT DISTINCT state from job_list";
+                        $sql2="SELECT DISTINCT state from joblistings";
                         $res2=mysqli_query($conn,$sql2);
                         if($res2 == TRUE)
                         {
@@ -336,7 +342,7 @@ $j_id=$_GET['j_id'];
                     <select name="district" id="val3" style="color:#3598DB;">
                     <option value="0">Select district &emsp;v</option>
                     <?php
-                        $sql2="SELECT DISTINCT district from job_list";
+                        $sql2="SELECT DISTINCT district from joblistings";
                         $res2=mysqli_query($conn,$sql2);
                         if($res2 == TRUE)
                         {
@@ -369,7 +375,7 @@ $j_id=$_GET['j_id'];
 
                 if($flag == 0)
                 {
-                   $sql1="select * from job_list";
+                   $sql1="select * from joblistings";
                 }
                 $res=mysqli_query($conn,$sql1);
                 if($res == TRUE)
@@ -380,9 +386,9 @@ $j_id=$_GET['j_id'];
                         while($rows=mysqli_fetch_assoc($res))
                         {
 
-                            $rec_img=$rows['rec_img'];
+                            $rec_img=$rows['logo'];
                             $recruiters_name=$rows['recruiters_name'];
-                            $company_email=$rows['company_email'];
+                            // $company_email=$rows['company_email'];
                             $status=$rows['status'];
                             $start_date=$rows['start_date'];
                             $qualification=$rows['qualification'];
@@ -392,10 +398,10 @@ $j_id=$_GET['j_id'];
                     ?>
             <div class="singletask_myTasks">
                 <input type="checkbox" name="checkBoxItem" id="te2" > &emsp;
-                <?php echo '<img src="data:image;base64,'.base64_encode($rec_img).' "  style="width: 50px; height: 50px;" >' ;   ?>
+                <!-- <?php echo '<img src="data:image;base64,'.base64_encode($rec_img).' "  style="width: 50px; height: 50px;" >' ;   ?> -->
                 <span>
                 <p class="light_spanItem_singleTask_myTasks1"><?php echo $contact_client_company; ?> (<?php echo $qualification; ?>)</p>
-                    <p class="light_spanItem_singleTask_myTasks" style="font-size:12px"><?php echo $company_email; ?></p>
+                    <!-- <p class="light_spanItem_singleTask_myTasks" style="font-size:12px"><?php echo $company_email; ?></p> -->
                 </span>&emsp;
                 <span>
                     <p class="light_spanItem_singleTask_myTasks">Status</p>
@@ -473,7 +479,7 @@ $j_id=$_GET['j_id'];
                     </div>
                         <!-- <div class="displayname">  -->
                     <div>
-                        <p><b><?php echo  $job_views ?> &nbsp;&emsp;&emsp;6 &nbsp;&emsp;&emsp;1/4</b></p>
+                        <!-- <p><b><?php echo  $job_views ?> &nbsp;&emsp;&emsp;6 &nbsp;&emsp;&emsp;1/4</b></p> -->
                     </div><br><br>
                         <!-- <div class="displayname">  -->
                     <div>
@@ -490,7 +496,7 @@ $j_id=$_GET['j_id'];
                         <div>
                             <p style="color:#979797; ">Created by</p>
                             <p style="color:#3598DB; "><?php echo  $advert_contact_name ?></p>
-                            <p style="color:#333333; line-height:10%"><?php echo  $company_email ?></p>
+                            <!-- <p style="color:#333333; line-height:10%"><?php echo  $company_email ?></p> -->
                             <p style="color:#333333; line-height:30%">+91 <?php echo  $advert_contact_no ?></p>
                         </div><br>
 
@@ -498,7 +504,7 @@ $j_id=$_GET['j_id'];
                         <div>
                             <p style="color:#979797; ">Active Contact</p>
                             <p style="color:#3598DB; "><?php echo  $advert_contact_name ?></p>
-                            <p style="color:#333333; line-height:10%"><?php echo  $company_email ?></p>
+                            <!-- <p style="color:#333333; line-height:10%"><?php echo  $company_email ?></p> -->
                             <p style="color:#333333; line-height:30%">+91 <?php echo  $advert_contact_no ?></p>
                         </div><br>
 
@@ -506,14 +512,14 @@ $j_id=$_GET['j_id'];
                         <div>
                             <p style="color:#979797; ">Assigned to</p>
                             <p style="color:#3598DB; "><?php echo  $advert_contact_name ?></p>
-                            <p style="color:#333333; line-height:10%"><?php echo  $company_email ?></p>
+                            <!-- <p style="color:#333333; line-height:10%"><?php echo  $company_email ?></p> -->
                             <p style="color:#333333; line-height:30%">+91 <?php echo  $advert_contact_no ?></p>
                         </div><br>
 
                         <!-- <div class="displayname"> -->
                         <div>
                             <p style="color:#979797; ">Contact info</p>
-                            <p style="color:#3598DB; "><?php echo  $company_email ?></p>
+                            <!-- <p style="color:#3598DB; "><?php echo  $company_email ?></p> -->
                             <p style="color:#333333; line-height:10%">+91 <?php echo  $advert_contact_no ?></p>
                             <p style="color:#333333; line-height:30%">+91 <?php echo  $advert_contact_no ?></p>
                         </div><br>

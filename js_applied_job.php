@@ -1,11 +1,14 @@
-<?php include('include/header.php')?>
+
 <?php
-define('LOCALHOST','localhost');
-define('DB_USERNAME','root');
-define('DB_PASSWORD','');
-define('DB_NAME','analyse');
-$conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
+
+   include 'connection1.php';
+   session_start();
 ?>
+
+
+
+<?php include('include/header.php')?>
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -38,8 +41,8 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
 
     <br>
     <div class="bread-crumbs_Mytools-recruiter">
-     <a href="js_dashboard.php" class="active-breadcrumb-link">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>Dashboard</u> </a><span style="color:#3598DB"> > </span>
-     <a href="js_applied_job.php" class="active-breadcrumb-link"><u> Applied_Jobs </u></a>
+     <a href="" class="active-breadcrumb-link">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>Dashboard</u> </a><span style="color:#3598DB"> > </span>
+     <a href="" class="active-breadcrumb-link"><u> Applied_Jobs </u></a>
     </div>
     <br><br>
     <div class="main_body">
@@ -67,11 +70,11 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
               $exclamindus="";
               $mystate=$_GET['mystate'];
               $location=$_POST['location'];
-              $minsal=$_POST['minsal'];
-              $maxsal=$_POST['maxsal'];
-              $chooseindustry=$_POST['chooseindustry'];
-              $jobtype=$_POST['jobtype'];
-              $skill=$_POST['skill'];
+              $minsal=$_POST['salary_range1'];
+              $maxsal=$_POST['salary_range2'];
+              $chooseindustry=$_POST['status'];
+              $jobtype=$_POST['job_type'];
+              $skill=$_POST['skills'];
               if($location=="")
               {
                 $location="!";
@@ -92,7 +95,7 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
 
               $skill='%'.$skill.'%';
 
-              $sql3="SELECT * FROM `jobapplication` WHERE (state ='$mystate') AND (district $exclamloc='$location') AND (package BETWEEN $minsal AND $maxsal) AND (industry $exclamindus= '$chooseindustry') AND (job_type='$jobtype') AND (skills LIKE '$skill')";
+              $sql3="SELECT * FROM `joblistings` WHERE (state ='$mystate') AND (district $exclamloc='$location') AND (package BETWEEN $minsal AND $maxsal) AND (industry $exclamindus= '$chooseindustry') AND (job_type='$jobtype') AND (skills LIKE '$skill')";
               $res3=mysqli_query($conn,$sql3);
               if($res3 == TRUE)
               {
@@ -170,7 +173,7 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
           <div class="row">
             <?php
               $mystate=$_GET['mystate'];
-              $sql="select * from jobapplication where state='$mystate'";
+              $sql="select * from joblistings where state='$mystate'";
               $res=mysqli_query($conn,$sql);
               if($res == TRUE)
               {
