@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2022 at 02:17 PM
+-- Generation Time: Mar 11, 2022 at 03:17 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -30,8 +30,26 @@ SET time_zone = "+00:00";
 CREATE TABLE `about_org` (
   `abt_us_id` int(2) NOT NULL,
   `about_us` varchar(255) NOT NULL,
-  `industry` varchar(255) NOT NULL
+  `industry` varchar(255) NOT NULL,
+  `org_name` varchar(225) NOT NULL,
+  `logo` varchar(225) NOT NULL,
+  `insta_link` varchar(225) NOT NULL,
+  `twitter_link` varchar(225) NOT NULL,
+  `org_location` varchar(225) NOT NULL,
+  `org_address` varchar(225) NOT NULL,
+  `org_rec_name` varchar(225) NOT NULL,
+  `org_email` varchar(225) NOT NULL,
+  `org_phone` varchar(225) NOT NULL,
+  `linkeln_link` varchar(225) NOT NULL,
+  `facebook_link` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `about_org`
+--
+
+INSERT INTO `about_org` (`abt_us_id`, `about_us`, `industry`, `org_name`, `logo`, `insta_link`, `twitter_link`, `org_location`, `org_address`, `org_rec_name`, `org_email`, `org_phone`, `linkeln_link`, `facebook_link`) VALUES
+(101, 'Analysed', 'IT', 'Analysed', '', 'analysedInsta', 'analysedTwitter', 'India', 'Delhi', 'ana', 'analysed@gmail.com', '76875645', 'analysedlink', 'analysedFacebook');
 
 -- --------------------------------------------------------
 
@@ -1697,21 +1715,26 @@ CREATE TABLE `company_task` (
   `duration_hours` varchar(225) NOT NULL,
   `file_extensions` varchar(225) NOT NULL,
   `comp_img` varchar(225) NOT NULL,
-  `job_comp` varchar(225) NOT NULL
+  `job_comp` varchar(225) NOT NULL,
+  `rec_name` varchar(225) NOT NULL,
+  `job_n` int(11) NOT NULL,
+  `job_desc` varchar(225) NOT NULL,
+  `exp_inp` varchar(225) NOT NULL,
+  `exp_out` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `company_task`
 --
 
-INSERT INTO `company_task` (`job_id`, `task_id`, `restr_id`, `name_indi`, `name_task`, `desc_short`, `desc_skills`, `accuracy`, `start_date`, `end_date`, `duration_week`, `duration_days`, `duration_hours`, `file_extensions`, `comp_img`, `job_comp`) VALUES
-(1, 0, 0, 'new tzask', 'java developement', 'develope app', 'mobile application', '10', '2022-03-09', '2022-03-12', '5', '2', '2', 'pdf', '', ''),
-(2, 0, 0, 'new tzask', 'java developement', 'develope app', 'mobile application', '10', '2022-03-09', '2022-03-12', '5', '2', '2', 'pdf', '', ''),
-(3, 0, 0, 'new tzask', 'java developement', 'develope app', 'mobile application', '10', '2022-03-09', '2022-03-12', '5', '2', '2', 'pdf', '', ''),
-(4, 0, 0, 'new tzask', 'java developement', 'develope app', 'mobile application', '10', '2022-03-09', '2022-03-12', '5', '2', '2', 'pdf', '', ''),
-(5, 4, 1, 'max', 'pyton development', 'flask app', 'web page', '88', '2000-02-03', '2021-11-30', '5', '', '2', 'pdf', '', ''),
-(6, 4, 5, 'max', 'pyton development', 'flask app', 'web page', '88', '2000-02-03', '2021-11-30', '5', '', '2', 'pdf', '', ''),
-(7, 4, 5, 'max', 'pyton development', 'develope app', 'mobile application', '10', '2022-11-22', '2023-12-31', '5', '2', '2', 'pdf', '', '');
+INSERT INTO `company_task` (`job_id`, `task_id`, `restr_id`, `name_indi`, `name_task`, `desc_short`, `desc_skills`, `accuracy`, `start_date`, `end_date`, `duration_week`, `duration_days`, `duration_hours`, `file_extensions`, `comp_img`, `job_comp`, `rec_name`, `job_n`, `job_desc`, `exp_inp`, `exp_out`) VALUES
+(1, 10, 0, 'new tzask', 'java developement', 'develope app', 'mobile application', '10', '2022-03-09', '2022-03-12', '5', '2', '2', 'pdf', '', 'new', 'max', 0, 'devlopment', '10', '20'),
+(2, 0, 0, 'new tzask', 'java developement', 'develope app', 'mobile application', '10', '2022-03-09', '2022-03-12', '5', '2', '2', 'pdf', '', '', '', 0, '', '', ''),
+(3, 0, 0, 'new tzask', 'java developement', 'develope app', 'mobile application', '10', '2022-03-09', '2022-03-12', '5', '2', '2', 'pdf', '', '', '', 0, '', '', ''),
+(4, 0, 0, 'new tzask', 'java developement', 'develope app', 'mobile application', '10', '2022-03-09', '2022-03-12', '5', '2', '2', 'pdf', '', '', '', 0, '', '', ''),
+(5, 4, 1, 'max', 'pyton development', 'flask app', 'web page', '88', '2000-02-03', '2021-11-30', '5', '', '2', 'pdf', '', '', '', 0, '', '', ''),
+(6, 4, 5, 'max', 'pyton development', 'flask app', 'web page', '88', '2000-02-03', '2021-11-30', '5', '', '2', 'pdf', '', '', '', 0, '', '', ''),
+(7, 4, 5, 'max', 'pyton development', 'develope app', 'mobile application', '10', '2022-11-22', '2023-12-31', '5', '2', '2', 'pdf', '', '', '', 0, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -2101,6 +2124,31 @@ INSERT INTO `notes` (`id`, `firstname`, `note_type`, `reference_to`, `Job_refere
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `query`
+--
+
+CREATE TABLE `query` (
+  `query_id` int(11) NOT NULL,
+  `Question` varchar(225) NOT NULL,
+  `resp_name` varchar(225) NOT NULL,
+  `resp_img` varchar(225) NOT NULL,
+  `resp_ans` varchar(225) NOT NULL,
+  `resp_time` date NOT NULL DEFAULT current_timestamp(),
+  `ques_time` date NOT NULL DEFAULT current_timestamp(),
+  `resp_date` date NOT NULL DEFAULT current_timestamp(),
+  `ques_date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `query`
+--
+
+INSERT INTO `query` (`query_id`, `Question`, `resp_name`, `resp_img`, `resp_ans`, `resp_time`, `ques_time`, `resp_date`, `ques_date`) VALUES
+(11, 'how to update', 'new', '', 'update using files upload', '2022-03-23', '2022-03-30', '2022-03-30', '2022-03-30');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `recruiter`
 --
 
@@ -2422,6 +2470,12 @@ ALTER TABLE `notes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `query`
+--
+ALTER TABLE `query`
+  ADD PRIMARY KEY (`query_id`);
+
+--
 -- Indexes for table `recruiter`
 --
 ALTER TABLE `recruiter`
@@ -2544,6 +2598,12 @@ ALTER TABLE `jobseeker`
 --
 ALTER TABLE `notes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `query`
+--
+ALTER TABLE `query`
+  MODIFY `query_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `recruiter`
