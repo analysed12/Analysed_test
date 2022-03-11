@@ -75,7 +75,7 @@
                       $minsal=$_POST['minsal'];
                       $maxsal=$_POST['maxsal'];
                       $chooseindustry=$_POST['chooseindustry'];
-                      $jobtype=$_POST['jobtype'];
+                      $jobtype=$_POST['job_type'];
                       $skill=$_POST['skill'];
                       if($location=="")
                       {

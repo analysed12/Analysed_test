@@ -1,11 +1,10 @@
-<?php include('include/header.php')?>
 <?php
-define('LOCALHOST','localhost');
-define('DB_USERNAME','root');
-define('DB_PASSWORD','');
-define('DB_NAME','analyse');
-$conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
+include 'connection1.php';          //database connection page included
+session_start();             //session has been started
 ?>
+
+
+<?php include('include/header.php')?>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -39,8 +38,8 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
 
     <br>
     <div class="bread-crumbs_Mytools-recruiter">
-     <a href="js_dashboard.php" class="active-breadcrumb-link">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>Dashboard</u> </a><span style="color:#3598DB"> > </span>
-     <a href="JS_Starred_Jobs.php" class="active-breadcrumb-link"><u> Starred_Jobs </u></a>
+     <a href="" class="active-breadcrumb-link">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<u>Dashboard</u> </a><span style="color:#3598DB"> > </span>
+     <a href="" class="active-breadcrumb-link"><u> Starred_Jobs </u></a>
     </div>
     <br><br>
     <div class="main_body">
@@ -90,12 +89,11 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
               if($chooseindustry=="")
               {
                 $exclamindus="!";
-
               }
 
               $skill='%'.$skill.'%';
 
-              $sql3="SELECT * FROM `starred_jobs` WHERE (state ='$mystate') AND (district $exclamloc='$location') AND (package BETWEEN $minsal AND $maxsal) AND (industry $exclamindus= '$chooseindustry') AND (job_type='$jobtype') AND (skills LIKE '$skill')";
+              $sql3="SELECT * FROM `joblistings` WHERE (state ='$mystate') AND (district $exclamloc='$location') AND (package BETWEEN $minsal AND $maxsal) AND (industry $exclamindus= '$chooseindustry') AND (job_type='$jobtype') AND (skills LIKE '$skill')";
                   //echo $sql3;
               $res3=mysqli_query($conn,$sql3);
               if($res3 == TRUE)
@@ -125,6 +123,7 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
                     $actual_days=round($datediff2 / (60 * 60 * 24));
                     $district=$rows['district'];
             ?>
+
 
             <div class="col-4 mb-3">
               <div class="card" style="height:315px;width:250px" id="temp2">
@@ -175,7 +174,7 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
           <div class="row">
             <?php
               $mystate=$_GET['mystate'];
-              $sql="select * from starred_jobs where state='$mystate'";
+              $sql="select * from joblistings where state='$mystate'";
               $res=mysqli_query($conn,$sql);
               if($res == TRUE)
               {
@@ -203,12 +202,9 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
                       $start_date2 = strtotime($start_date);
                       $datediff2 =  $your_date - $start_date2;
 
-
-
                       $actual_days=round($datediff2 / (60 * 60 * 24));
                       $district=$rows['district'];
             ?>
-
 
             <div class="col-4 mb-3">
               <div class="card" style="height:315px;width:250px" id="temp2">
