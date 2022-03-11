@@ -1,11 +1,15 @@
-<?php include('include/header.php')?>
+
 <?php
-define('LOCALHOST','localhost');
-define('DB_USERNAME','root');
-define('DB_PASSWORD','');
-define('DB_NAME','analyse');
-$conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
+
+   include 'connection1.php';
+   session_start();
 ?>
+
+
+
+
+
+<?php include('include/header.php')?>
 
 
 <html>
@@ -59,16 +63,16 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
           <div class="col-10">
             <p class="c1">Step 3</p>
             <p class="c2">Assign Task</p>
-            <p class="c3" style="margin-right:50px;">Assign task to one or a group of individual. elitr, sed diam nonumy eirmod tempor 
-                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et 
+            <p class="c3" style="margin-right:50px;">Assign task to one or a group of individual. elitr, sed diam nonumy eirmod tempor
+                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
                 justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea</p><br>
-            
+
 
             <?php
            if(isset($_POST['create_task']))
            {
 
-             $job_id="J101";
+
              $task_id=$_GET['t_id'];
              $restr_id=$_GET['r_id'];
              $name_indi=$_POST['i_name'];
@@ -83,11 +87,11 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
              $duration_hours=$_POST['duration_hours'];
              $file_extensions=$_POST['file_extensions'];
 
-            $sql2="INSERT INTO company_task(`job_id`, `task_id`, `restr_id`, `name_indi`, `name_task`, 
+            $sql2="INSERT INTO company_task( `task_id`, `restr_id`, `name_indi`, `name_task`,
                     `desc_short`, `desc_skills`, `accuracy`, `start_date`, `end_date`,
-                    `duration_week`, `duration_days`, `duration_hours`, `file_extensions`) 
-                    VALUES ('$job_id'       ,'$task_id'        , '$restr_id'       , '$name_indi', '$name_task'   , '$desc_short', 
-                            '$desc_skills'  , '$accuracy'      , '$start_date'     , '$end_date' ,'$duration_week', 
+                    `duration_week`, `duration_days`, `duration_hours`, `file_extensions`)
+                    VALUES ('$task_id'        , '$restr_id'       , '$name_indi', '$name_task'   , '$desc_short',
+                            '$desc_skills'  , '$accuracy'      , '$start_date'     , '$end_date' ,'$duration_week',
                             '$duration_days', '$duration_hours', '$file_extensions')";
              $res2=mysqli_query($conn,$sql2);
              if($res2 === TRUE)

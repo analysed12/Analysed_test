@@ -1,12 +1,15 @@
-<?php include('include/header.php')?>
+
 
 <?php
-define('LOCALHOST','localhost');
-define('DB_USERNAME','root');
-define('DB_PASSWORD','');
-define('DB_NAME','analyse');
-$conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
+
+   include 'connection1.php';
+   session_start();
 ?>
+
+
+
+
+<?php include('include/header.php')?>
 
 <head>
   <link rel="stylesheet" href="css/my_task_10.css">
@@ -50,18 +53,18 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
           <div class="col-2">
             <div class="options">
               <button class="b1" id="ac" onclick="location.href='my_task_10.php'">Step 1</button>
-              <button class="b1" id="nac">Step 2</button>
-              <button class="b1" id="nac">Step 3</button>
+              <button class="b1" id="ac" onclick="location.href='my_task_11.php'">Step 2</button>
+              <button class="b1" id="ac" onclick="location.href='my_task_13.php'">Step 3</button>
             </div>
           </div>
-          
+
           <div class="col-10">
             <p class="c1">Step 1</p>
             <p class="c2">Select the type of task</p><br>
             <ul class="fullclick">
-              
+
               <?php
-                $sql="select * from task_type";
+                $sql="select * from task";
                 $res=mysqli_query($conn,$sql);
                 if($res == TRUE)
                 {
@@ -72,7 +75,7 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
                     {
                       $name=$rows['task_name'];
                       $image_task=$rows['task_img'];
-                      $desc=$rows['task_desc'];
+                      $desc=$rows['description'];
                       $task_id=$rows['task_id']
               ?>
               <li>
@@ -93,12 +96,12 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
                   }
 
                 ?>
-              
+
               <br>
               <br><br><br>
 
             </ul>
-        
+
           </div>
         </div>
     </div>

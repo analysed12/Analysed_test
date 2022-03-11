@@ -1,13 +1,12 @@
-<?php include('include/header.php')?>
+
 <?php
-define('LOCALHOST','localhost');
-define('DB_USERNAME','root');
-define('DB_PASSWORD','');
-define('DB_NAME','analyse');
-$conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
+
+   include 'connection1.php';
+   session_start();
 ?>
 
 
+<?php include('include/header.php')?>
 <head>
   <link rel="stylesheet" href="css/my_task_11.css">
 
@@ -60,17 +59,17 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
             <div class="options">
               <button class="b1" id="nac" onclick="location.href='my_task_10.php'">Step 1</button>
               <button class="b1" id="ac" onclick="location.href='my_task_11.php'">Step 2</button>
-              <button class="b1" id="nac">Step 3</button>
+              <button class="b1" id="ac" onclick="location.href='my_task_13.php'">Step 3</button>
             </div>
           </div>
 
           <div class="col-10">
-            <p class="c1">Step 2 
+            <p class="c1">Step 2
               <!-- <button class="m2" id="btnnext"  onclick="location.href='my_task_13.php'"> Next &#8594; </button> -->
             </p>
             <p class="c2">Set restrictions</p>
             <p class="c3" style="margin-right:100px">Choose which restrictions you want to choose. elitr, sed diam nonumy eirmod tempor
-                 invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et 
+                 invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
                  justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea</p><br>
           </div>
         </div>
@@ -79,7 +78,7 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
           <?php
                 $sql="select * from task_restriction";
                 $res=mysqli_query($conn,$sql);
-                $t_id=$_GET['id'];
+                $t_id=1;//$_GET['id'];
                 if($res == TRUE)
                 {
                   $count=mysqli_num_rows($res);
@@ -105,12 +104,12 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
             }
 
           ?>
-<!-- 
+<!--
           <div class="col-3" width="15px">
           <div class="card" style="height:360px;width:250px">
               <img src="img/person.png" height="63px" width="63px" style="margin-left:80px;margin-top:20px;">
               <br><button class="addFilesMyTasks1"  > Candidate monitoring</button>
-              <br><p class="c4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor 
+              <br><p class="c4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
                 invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero.</p>
             </div>
           </div>
@@ -119,7 +118,7 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
           <div class="card" style="height:360px;width:250px">
               <img src="img/phonelink_lock-24px.svg" height="63px" width="63px" style="margin-left:80px;margin-top:20px;">
               <br><button class="addFilesMyTasks1"  > Tab Lock</button>
-              <br><p class="c4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor 
+              <br><p class="c4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
                 invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero.</p>
             </div>
           </div>
@@ -128,7 +127,7 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
           <div class="card" style="height:360px;width:250px">
               <img src="img/face.png" height="63px" width="63px" style="margin-left:80px;margin-top:20px;">
               <br><button class="addFilesMyTasks1"  > Facial unlock</button>
-              <br><p class="c4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor 
+              <br><p class="c4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
                 invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero.</p>
             </div>
           </div> -->
@@ -136,18 +135,18 @@ $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_er
         </div>
         <br><br>
 
-        
+
     </div>
 
     <!-- <script type="text/javascript">
-        
+
         $(document).ready(() => {
 
             $("#idscreenm").click(() => {
               $("#btnnext").show();
               $('#idscreenm').css({"box-shadow" : "1px 24px 40px #00000033"});
             });
-          
+
         });
       </script> -->
 </body>
