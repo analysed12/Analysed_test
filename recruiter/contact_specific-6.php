@@ -1,11 +1,15 @@
-<?php include('header.php') ?>
 <?php
-   define('LOCALHOST','localhost');
-   define('DB_USERNAME','root');
-   define('DB_PASSWORD','');
-   define('DB_NAME','analyse');
-   $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
+
+   include 'connection1.php';     //database connection page included
+   session_start();        //session has been started
+
+
 ?>
+
+
+
+
+<?php include('header.php') ?>
 <?php
 $flag=0;
 if(isset($_POST['btnsearch']))
@@ -17,7 +21,7 @@ if(isset($_POST['btnsearch']))
 
 ?>
 <?php
-    $c_id=1004;
+    $c_id=15;
     $sql="select * from client where client_id='$c_id'";
     $res=mysqli_query($conn,$sql);
     if($res == TRUE)
@@ -27,13 +31,13 @@ if(isset($_POST['btnsearch']))
         {
             while($rows=mysqli_fetch_assoc($res))
             {
-                $name=$rows['name'];
-                $company_name=$rows['company_name'];
-                $client_img=$rows['client_img'];
+                $name=$rows['company_name'];
+                $company_name=$rows['company'];
+                $client_img=$rows['company_img'];
                 $role=$rows['role'];
                 $main_email=$rows['main_email'];
                 $contact_no=$rows['contact_no'];
-                $added_on=$rows['added_on'];
+                $added_on=$rows['last_updated'];
                 $city=$rows['city'];
                 $state=$rows['state'];
                 $country=$rows['country'];
@@ -214,14 +218,14 @@ if(isset($_POST['btnsearch']))
                 {
                     while($rows=mysqli_fetch_assoc($res))
                     {
-                        $n_id=$rows['n_id'];
-                        $last_updated=$rows['last_updated'];
+                        $n_id=$rows['id'];
+                        $last_updated=$rows['last_edited'];
                         $added_on=$rows['added_on'];
-                        $added_by=$rows['added_by'];
+                        $added_by=$rows['firstname'];
                         $img=$rows['img'];
-                        $type=$rows['type'];
-                        $time=$rows['time'];
-                        $content=$rows['content'];
+                        $type=$rows['note_type'];
+                        $time=$rows['time_spent'];
+                        $content=$rows['notes'];
 
 
                  ?>

@@ -1,11 +1,17 @@
-<?php include('header.php') ?>
+
+
 <?php
-   define('LOCALHOST','localhost');
-   define('DB_USERNAME','root');
-   define('DB_PASSWORD','');
-   define('DB_NAME','analyse');
-   $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
+
+   include 'connection1.php';     //database connection page included
+   session_start();        //session has been started
+
+
 ?>
+
+
+
+
+<?php include('header.php') ?>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
@@ -110,7 +116,7 @@ if(isset($_POST['btnsearch']))
 
 ?>
 <?php
-    $c_id=1004;
+    $c_id=15;
     $sql="select * from client where client_id='$c_id'";
     $res=mysqli_query($conn,$sql);
     if($res == TRUE)
@@ -120,13 +126,13 @@ if(isset($_POST['btnsearch']))
         {
             while($rows=mysqli_fetch_assoc($res))
             {
-                $name=$rows['name'];
-                $company_name=$rows['company_name'];
-                $client_img=$rows['client_img'];
+                $name=$rows['company_name'];
+                $company_name=$rows['company'];
+                $client_img=$rows['company_img'];
                 $role=$rows['role'];
                 $main_email=$rows['main_email'];
                 $contact_no=$rows['contact_no'];
-                $added_on=$rows['added_on'];
+                $added_on=$rows['last_updated'];
                 $city=$rows['city'];
                 $state=$rows['state'];
                 $country=$rows['country'];
@@ -141,6 +147,7 @@ if(isset($_POST['btnsearch']))
         }
     }
 ?>
+
 <title>Contact specific</title>
 <link rel="stylesheet" href="./css/contact_specific-4.css">
 
@@ -344,7 +351,7 @@ if(isset($_POST['btnsearch']))
               <?php
                  if($flag == 0)
                  {
-                     $sql5="SELECT * FROM `contact_files` WHERE JS_id='JS111'";
+                     $sql5="SELECT * FROM `files` WHERE file_id=64";
                  }
 
                   $res5=mysqli_query($conn,$sql5);
@@ -355,11 +362,11 @@ if(isset($_POST['btnsearch']))
                     {
                       while($rows=mysqli_fetch_assoc($res5))
                       {
-                         $Id=$rows['Id'];
-                         $file_name=$rows['file_name'];
+                         $Id=$rows['file_id'];
+                         $file_name=$rows['files'];
                          $file_type=$rows['file_type'];
-                         $doc_type=$rows['doc_type'];
-                         $file_size=$rows['file_size'];
+                         // $doc_type=$rows['doc_type'];
+                         $file_size=$rows['kb'];
                          $file_size=round(($file_size/1024));
                          $added_on=$rows['added_on'];
 
@@ -379,7 +386,7 @@ if(isset($_POST['btnsearch']))
 
                     </div>
                     <div class="column">
-                        <p class="col-3"><?php echo $doc_type; ?></p>
+                        <!-- <p class="col-3"><?php echo $doc_type; ?></p> -->
                         <span class="col-span-3">View <i class="fa fa-eye" aria-hidden="true"></i></span>
                     </div>
                     <div class="column">

@@ -1,13 +1,17 @@
+<?php
+
+   include 'connection1.php';     //database connection page included
+   session_start();        //session has been started
+
+
+?>
+
+
+
+
 <?php include('header.php') ?>
 <?php
-   define('LOCALHOST','localhost');
-   define('DB_USERNAME','root');
-   define('DB_PASSWORD','');
-   define('DB_NAME','analyse');
-   $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
-?>
-<?php
-    $c_id=1004;
+    $c_id=15;
     $sql="select * from client where client_id='$c_id'";
     $res=mysqli_query($conn,$sql);
     if($res == TRUE)
@@ -17,13 +21,13 @@
         {
             while($rows=mysqli_fetch_assoc($res))
             {
-                $name=$rows['name'];
-                $company_name=$rows['company_name'];
-                $client_img=$rows['client_img'];
+                $name=$rows['company_name'];
+                $company_name=$rows['company'];
+                $client_img=$rows['company_img'];
                 $role=$rows['role'];
                 $main_email=$rows['main_email'];
                 $contact_no=$rows['contact_no'];
-                $added_on=$rows['added_on'];
+                $added_on=$rows['last_updated'];
                 $city=$rows['city'];
                 $state=$rows['state'];
                 $country=$rows['country'];
@@ -283,47 +287,48 @@
                     <?php
                        if($flag == 0)
                        {
-                           $sql1="select * from job_list";
+                           $sql1="select * from joblistings";
                        }
 
-                        $res=mysqli_query($conn,$sql1);
-                        if($res == TRUE)
-                        {
-                            $count=mysqli_num_rows($res);
-                            if($count >0)
-                            {
-                                while($rows=mysqli_fetch_assoc($res))
-                                {
-                                    $start_date=$rows['start_date'];
 
-                                    $priority=$rows['priority'];
-                                    $job_type=$rows['job_type'];
+                           $job_id=8;
+                           $sql="select * from joblistings where job_id =$job_id";
+                           $res=mysqli_query($conn,$sql);
+                           if($res == TRUE)
+                           {
+                               $count=mysqli_num_rows($res);
+                               if($count >0)
+                               {
+                                   while($rows=mysqli_fetch_assoc($res))
+                                   {
+                                       $priority=$rows['priority'];
+                                       $job_type=$rows['job_type'];
 
-                                    $position=$rows['position'];
-                                    $job_id=$rows['job_id'];
-                                    $state=$rows['state'];
+                                       $state=$rows['state'];
+                                       $position=$rows['position'];
+                                       $job_id=$rows['job_id'];
 
-                                    $contact_client_company=$rows['contact_client_company'];
-                                    $company_website=$rows['company_website'];
+                                       $contact_client_company=$rows['contact_client_company'];
+                                       $company_website=$rows['company_website'];
+                                       $end_date = $rows['end_date'];
+                                       $job_views=$rows['job_views'];
+                                       $openings=$rows['openings'];
 
-                                    $job_views=$rows['job_views'];
+                                       $recruiters_name=$rows['recruiters_name'];
+                                       $company_email=$rows['company_email'];
 
-                                    $recruiters_name=$rows['recruiters_name'];
-                                    $company_email=$rows['company_email'];
+                                       $now = time(); // or your date as well
+                                       $your_date = strtotime($end_date);
+                                       $datediff = $your_date -$now;
+                                       $remain_days=round($datediff / (60 * 60 * 24));
 
-                                    $end_date=$rows['end_date'];
-                                    $now = time(); // or your date as well
-                                    $your_date = strtotime($end_date);
-                                    $datediff = $now - $your_date;
-                                    $remain_days=round($datediff / (60 * 60 * 24));
-
-                                    if(($flag == 0) && ($statuss == 1))
-                                    {
-                                      if($remain_days < 0)
-                                      {
+                                       if($remain_days < 0)
+                                       {
                                          continue;
-                                      }
-                                    }
+                                       }
+
+
+
 
                                     if(($flag == 0) && ($statuss == 2))  //for completed
                                     {
