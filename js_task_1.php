@@ -1,11 +1,12 @@
-<?php include('include/header.php')?>
+
 <?php
-   define('LOCALHOST','localhost');
-   define('DB_USERNAME','root');
-   define('DB_PASSWORD','');
-   define('DB_NAME','analyse');
-   $conn=mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD,DB_NAME) or die(mysqli_error());
+
+   include 'connection1.php';
+   session_start();
 ?>
+
+<?php include('include/header.php')?>
+
 <html>
 <head>
   <link rel="stylesheet" href="css/js_task_1.css">
@@ -120,7 +121,7 @@
     <br><br><br>
     <div class="head_ele">
         <?php
-            $t_id='T603';
+            $t_id='10';
             $sql="select * from company_task where task_id='$t_id'";
             $res=mysqli_query($conn,$sql);
             if($res == TRUE)
@@ -179,7 +180,7 @@
         <br><br><br>
         <div class="row" style="margin-left:220px;margin-right:200px">
             <div class="col-6">
-                <button class="val3" onclick="window.location.href = 'js_task_1.php';">&emsp;&emsp;End Task </button>
+                <button class="val3" onclick="window.location.href = 'js_task.php';">&emsp;&emsp;End Task </button>
             </div>
             <div class="col-6">
                 <button id="submittask" class="val4" onclick=""> &emsp;&emsp;Submit Task </button>
@@ -193,7 +194,7 @@
             <img src="img/up.png" height="20px" width="20px"></p><br><br>
             <div>
             <?php
-            $sql2="select * from querry ";
+            $sql2="select * from query ";
             $res2=mysqli_query($conn,$sql2);
             if($res2 == TRUE)
             {
@@ -209,7 +210,7 @@
                         $resp_time=$rows['resp_time'];
                         $ques_time=$rows['ques_time'];
                         $resp_date=$rows['resp_date'];
-                        $ques_date=$rows['resp_date'];
+                        $ques_date=$rows['ques_date'];
                  ?>
             <p class="bot3"><b>Query topic</b>
             <span class="content_2" style="margin-left:570px"><?php echo $ques_date; ?>&emsp; <?php echo $ques_time; ?></span></p>
