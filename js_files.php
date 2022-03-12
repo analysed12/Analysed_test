@@ -1,6 +1,14 @@
+
+<?php
+
+   include 'connection1.php';
+   session_start();
+?>
+
+
 <?php include('include/header.php') ?>
 <link rel="stylesheet" href="css/js_files.css">
-<?php include('connection.php') ?>
+
 
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -17,7 +25,7 @@
 </style>
 <body>
 <?php
-   $sql7="SELECT count(*) as NumImages, sum(file_size) as SizeImages FROM js_files WHERE file_type in ('jpg','png') AND JS_id='JS245'";
+   $sql7="SELECT count(*) as NumImages, sum(file_size) as SizeImages FROM js_files WHERE file_type in ('jpg','png') AND JS_id='1'";
    $res7=mysqli_query($conn,$sql7);
    if($res7 == TRUE)
    {
@@ -29,7 +37,7 @@
      }
    }
    //
-   $sql7="SELECT count(*) as NumPdf, sum(file_size) as SizePdf FROM js_files WHERE file_type in ('pdf') AND JS_id='JS245'";
+   $sql7="SELECT count(*) as NumPdf, sum(file_size) as SizePdf FROM js_files WHERE file_type in ('pdf') AND JS_id='1'";
    $res7=mysqli_query($conn,$sql7);
    if($res7 == TRUE)
    {
@@ -41,7 +49,7 @@
      }
    }
    //
-   $sql7="SELECT count(*) as NumExcel, sum(file_size) as SizeExcel FROM js_files WHERE file_type in ('xlsx','csv') AND JS_id='JS245'";
+   $sql7="SELECT count(*) as NumExcel, sum(file_size) as SizeExcel FROM js_files WHERE file_type in ('xlsx','csv') AND JS_id='1'";
    $res7=mysqli_query($conn,$sql7);
    if($res7 == TRUE)
    {
@@ -78,7 +86,7 @@
                   $created = @date('Y-m-d');
                   $fileSize = $_FILES['file1']['size'];
                     $sql4="INSERT INTO `js_files`(`JS_id`, `file_name`, `file_type`, `doc_type`, `file_size`, `added_on`)
-                   VALUES ('JS245','$fileName','$ext','$documenttype',$fileSize,'$created')";
+                   VALUES ('JS245','$fileName','$ext','$documenttype','$fileSize','$created')";
                    $res4=mysqli_query($conn,$sql4);
                    if($res4)
                    {
