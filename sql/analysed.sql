@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2022 at 03:17 PM
+-- Generation Time: Mar 12, 2022 at 02:20 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -99,7 +99,9 @@ CREATE TABLE `candidates` (
 
 INSERT INTO `candidates` (`candidate_id`, `image`, `firstname`, `lastname`, `candidate_email`, `countrycode`, `phone_no`, `birth_date`, `status`, `address`, `country`, `city_name`, `zipcode`, `state`, `current_title`, `company_name`, `candidate_type`, `emp_preference`, `source`, `recruiter`, `current_salary`, `salary_range1`, `salary_range2`, `talents`, `resume`, `skills`, `qualifications`, `comment`, `availability_date`, `job`, `accessibility`, `response_type`, `last_updated`) VALUES
 (1, '5.jpg', 'John Smith', 'S', 'abc@gmail.com', '+91', 9878675545, '2021-10-12', 'Active', '1234,New Street.', 'India', 'Chennai', '637 409', 'Tamil Nadu', 'Web Developer', 'Fox Hunt', 'Contract', 'Temporary', 'Linkedin', 'Andrew foy', 24000, 20000, 40000, 'Team Player,Good Communicator,Self motivated,Adapt', '', 'HTML,CSS,JS,PHP', 'BCom', 'no comments to make', '2021-10-25', 'Sr.Product designer', 'Internal', 'Submission', '2022-03-05'),
-(2, '', '', '', '', '', 0, '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '', '', '', '', 'bad', '2021-02-28', '3', '3', '2', '2022-03-07');
+(2, '', '', '', '', '', 0, '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '', '', '', '', 'bad', '2021-02-28', '3', '3', '2', '2022-03-07'),
+(3, '', 'julia ', 'robert', 'jul@gmail.com', '', 7656432314, '2000-01-02', '1', 'Richmond town', 'Australia', 'london', '713305', 'karnataka', 'developer', 'facebook', '2', '3', '3', '3', 12000, 13300, 14000, 'c++', 'addCandidate1.txt', 'Cloud computing', 'BSc', 'working ', '2021-11-30', '1', '1', '1', '2022-03-12'),
+(4, '10.jpg', 'jammie', 'oliver', 'jami@gmail.com', '', 6756453423, '2021-10-29', '2', 'Richmond town', 'Australia', 'berlin', '713305', 'Maharastra', 'cyber security', 'Instagram', '2', '1', '1', '1', 12000, 13300, 14000, 'java', 'mbox.txt', 'Artificial Intelligence', 'BSc', 'working ', '2021-11-30', '2', '2', '2', '2022-03-12');
 
 -- --------------------------------------------------------
 
@@ -2098,6 +2100,29 @@ INSERT INTO `jobseeker` (`jobseeker_id`, `firstname`, `lastname`, `qualification
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `js_files`
+--
+
+CREATE TABLE `js_files` (
+  `JS_id` int(11) NOT NULL,
+  `file_name` varchar(225) NOT NULL,
+  `file_type` varchar(225) NOT NULL,
+  `doc_type` varchar(225) NOT NULL,
+  `file_size` varchar(225) NOT NULL,
+  `added_on` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `js_files`
+--
+
+INSERT INTO `js_files` (`JS_id`, `file_name`, `file_type`, `doc_type`, `file_size`, `added_on`) VALUES
+(1, '1.jpeg', 'jpeg', '', '54539', '2022-03-12'),
+(2, '1.jpeg', 'jpeg', '', '54539', '2022-03-12');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `notes`
 --
 
@@ -2464,6 +2489,12 @@ ALTER TABLE `jobseeker`
   ADD PRIMARY KEY (`jobseeker_id`);
 
 --
+-- Indexes for table `js_files`
+--
+ALTER TABLE `js_files`
+  ADD PRIMARY KEY (`JS_id`);
+
+--
 -- Indexes for table `notes`
 --
 ALTER TABLE `notes`
@@ -2519,7 +2550,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `candidates`
 --
 ALTER TABLE `candidates`
-  MODIFY `candidate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `candidate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `client`
@@ -2592,6 +2623,12 @@ ALTER TABLE `joblistings`
 --
 ALTER TABLE `jobseeker`
   MODIFY `jobseeker_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `js_files`
+--
+ALTER TABLE `js_files`
+  MODIFY `JS_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `notes`
